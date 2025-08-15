@@ -1,0 +1,883 @@
+@import "./reset.css";
+@import "./fonts.css";
+@import "./index.css";
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #23263a inset !important;
+  box-shadow: 0 0 0 1000px #23263a inset !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+input:autofill,
+input:autofill:focus,
+input:autofill:hover,
+input:autofill:active {
+  box-shadow: 0 0 0 1000px #23263a inset !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Ant Design Modal dark theme */
+.ant-modal-root .ant-modal-mask {
+  background: rgba(24, 28, 39, 0.85) !important;
+}
+.ant-modal-content {
+  background: #23263a !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px #000a !important;
+  color: #fff !important;
+}
+.ant-modal-header {
+  background: #23263a !important;
+  border-bottom: 1px solid #353b4a !important;
+  border-radius: 18px 18px 0 0 !important;
+  /* Flex align to center title vertically with close button */
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 20px !important;
+  min-height: 56px !important;
+}
+.ant-modal-title {
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  flex: 1 1 auto !important;
+  padding-right: 12px !important;
+}
+.ant-modal-close {
+  color: #fff !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ant-modal-close:hover,
+.ant-modal-close:focus,
+.ant-modal-close:active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.ant-modal-close .ant-modal-close-x {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ant-modal-footer {
+  background: #23263a !important;
+  border-top: 1px solid #353b4a !important;
+}
+.ant-modal-body {
+  background: #23263a !important;
+  color: #fff !important;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Custom global scrollbar styles for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23263a;
+}
+::-webkit-scrollbar-thumb {
+  background: #35395a;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4a5474;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #35395a #23263a;
+}
+
+/* GLOBAL DARK THEME INPUTS, BUTTONS, SELECTS, PAGINATION */
+input,
+textarea,
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector {
+  background: #23263a !important;
+  color: #fff !important;
+  border: 1.5px solid #35395a !important;
+  border-radius: 8px !important;
+  height: 40px !important;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Hide clear (X) buttons globally on inputs/selects/pickers */
+.ant-input-clear-icon,
+.ant-select-clear,
+.ant-picker-clear {
+  display: none !important;
+}
+/* Edge/IE clear icon */
+input::-ms-clear,
+input::-ms-reveal {
+  display: none !important;
+}
+/* WebKit search cancel button */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:focus,
+textarea:focus,
+.ant-input:focus,
+.ant-input-affix-wrapper-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: #35395a !important;
+  box-shadow: none !important;
+}
+input::placeholder,
+textarea::placeholder,
+.ant-input::placeholder {
+  color: #bfc9da !important;
+}
+
+.ant-select-selection-item {
+  color: #fff !important;
+}
+
+button,
+.ant-btn {
+  background: #35395a !important;
+  color: #fff !important;
+  border: 1.5px solid #35395a !important;
+  border-radius: 8px !important;
+  font-weight: 600;
+  height: 40px !important;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s;
+}
+button:hover,
+.ant-btn:hover {
+  background: #4f8cff !important;
+  color: #fff !important;
+  border-color: #35395a !important;
+}
+
+/* Hide number input spin buttons */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Ant Design InputNumber spin buttons */
+.ant-input-number-handler-wrap {
+  display: none !important;
+}
+
+/* Form input alignment fixes */
+.ant-form-item {
+  margin-bottom: 16px !important;
+}
+
+.ant-form-item-control {
+  line-height: 1 !important;
+}
+
+.ant-input-number {
+  width: 100% !important;
+}
+
+.ant-input-number .ant-input-number-input {
+  height: 40px !important;
+  line-height: 40px !important;
+  padding: 0 12px !important;
+}
+
+/* Ant Design Pagination dark theme override */
+.ant-pagination {
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.ant-pagination-item {
+  background: #23263a !important;
+  border: 1px solid #35395a !important;
+  color: #bfc9da !important;
+  border-radius: 8px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+}
+
+.ant-pagination-item-active {
+  background: #4f8cff !important;
+  border-color: #4f8cff !important;
+  color: #fff !important;
+}
+
+.ant-pagination-item:hover {
+  background: #35395a !important;
+  border-color: #4f8cff !important;
+  color: #fff !important;
+}
+
+.ant-pagination-prev,
+.ant-pagination-next {
+  background: #23263a !important;
+  border: 1px solid #35395a !important;
+  border-radius: 8px !important;
+  color: #bfc9da !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+}
+
+/* Ensure prev/next inner link inherits dark styles */
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  background: #23263a !important;
+  border: 1px solid #35395a !important;
+  color: #bfc9da !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.ant-pagination-prev:hover,
+.ant-pagination-next:hover {
+  background: #35395a !important;
+  border-color: #4f8cff !important;
+  color: #fff !important;
+}
+
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  background: #35395a !important;
+  border-color: #4f8cff !important;
+  color: #fff !important;
+}
+
+.ant-pagination-disabled,
+.ant-pagination-disabled:hover {
+  background: #23263a !important;
+  color: #444 !important;
+  border-color: #23263a !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.ant-pagination-disabled .ant-pagination-item-link,
+.ant-pagination-disabled:hover .ant-pagination-item-link {
+  background: #23263a !important;
+  color: #444 !important;
+  border-color: #23263a !important;
+}
+
+.ant-pagination-item a,
+.ant-pagination-prev a,
+.ant-pagination-next a {
+  color: inherit !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  line-height: 32px !important;
+}
+
+/* Table pagination container */
+.ant-table-wrapper .ant-table-pagination {
+  background: transparent !important;
+  margin: 12px 16px !important;
+}
+
+.ant-pagination-item-active a {
+  color: #fff !important;
+}
+
+/* Only the outer wrapper as border/backgrou , inner input is transparent with white text */
+.ant-input-affix-wrapper,
+.ant-input-search {
+  background: #23263a !important;
+  border: 1.5px solid #35395a !important;
+  border-radius: 8px !important;
+  height: 40px !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  padding: 0 !important;
+}
+.ant-input,
+input {
+  color: #fff !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 40px !important;
+  padding-left: 14px !important;
+  padding-right: 0 !important;
+  line-height: 34px !important;
+}
+.ant-input-search {
+  display: flex !important;
+}
+.ant-input-search .ant-input {
+  background: #23263a !important;
+  color: #fff !important;
+  border: 1.5px solid #35395a !important;
+  border-right: none !important;
+  border-radius: 8px 0 0 8px !important;
+  height: 40px !important;
+  box-shadow: none !important;
+}
+.ant-input-search .ant-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.ant-input-search .ant-input-search-button {
+  background: #35395a !important;
+  color: #fff !important;
+  border: 1.5px solid #35395a !important;
+  border-left: none !important;
+  border-radius: 0 8px 8px 0 !important;
+  height: 40px !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-input-search .ant-input-search-button:hover {
+  background: #4f8cff !important;
+  color: #fff !important;
+  border-color: #4f8cff !important;
+}
+.ant-input-search .anticon-search {
+  color: #fff !important;
+  font-size: 18px;
+}
+
+/* Ant Design Input Styling */
+.ant-input {
+  font-size: 15px;
+  padding: 8px 12px;
+  height: 40px;
+  background: #23263a !important;
+  color: #fff !important;
+  border: 1.5px solid #4a5474 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+}
+
+.ant-input:focus,
+.ant-input:hover {
+  border-color: #4a5474 !important;
+  background: #23263a !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Ant Design InputNumber Styling */
+.ant-input-number {
+  font-size: 15px;
+  padding: 8px 12px;
+  height: 40px;
+  background: #23263a !important;
+  color: #fff !important;
+  border: 1.5px solid #4a5474 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ant-input-number:focus,
+.ant-input-number:hover {
+  border-color: #4a5474 !important;
+  background: #23263a !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.ant-input-number-input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+/* Ant Design Select Styling */
+.ant-select {
+  font-size: 15px;
+  height: 40px;
+  width: 100%;
+}
+
+.ant-select-selector {
+  background: #23263a !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #4a5474 !important;
+  min-height: 40px !important;
+  height: 40px !important;
+  font-size: 15px !important;
+  box-shadow: none !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Keep tags in one visible row; overflow as +N counter */
+.ant-select-multiple .ant-select-selection-overflow {
+  flex-wrap: nowrap !important;
+}
+.ant-select-multiple .ant-select-selection-overflow-item {
+  max-width: 100% !important;
+}
+.ant-select-multiple .ant-select-selection-item {
+  white-space: nowrap !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #4a5474 !important;
+  background: #23263a !important;
+  box-shadow: none !important;
+}
+
+.ant-select-dropdown {
+  background: #23263a !important;
+  color: #fff !important;
+}
+
+.ant-select-item {
+  color: #fff !important;
+  font-size: 15px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ant-select-item-option-selected {
+  background: rgba(79, 140, 255, 0.18) !important;
+  color: #fff !important;
+}
+
+.ant-select-selection-placeholder {
+  color: #fff !important;
+  opacity: 0.7;
+}
+
+/* Ant Design TextArea Styling */
+.ant-input-textarea {
+  font-size: 15px;
+  padding: 8px 12px;
+  min-height: 44px;
+  background: #23263a !important;
+  color: #fff !important;
+  border: 1.5px solid #4a5474 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+  resize: vertical !important;
+}
+
+.ant-input-textarea:focus,
+.ant-input-textarea:hover {
+  border-color: #4a5474 !important;
+  background: #23263a !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* Ant Design Form Label Styling */
+.ant-form-item-label > label {
+  color: #bfc9da !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  margin-bottom: 4px !important;
+}
+
+/* Ant Design Modal Styling */
+.ant-modal-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+  background: #23263a !important;
+}
+
+.ant-form-item {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Ant Design Card dark theme */
+.ant-card {
+  background: #2a2d3e !important;
+  border: 1px solid #35395a !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+.ant-card-head {
+  background: #2a2d3e !important;
+  border-bottom: 1px solid #35395a !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.ant-card-head-title {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+.ant-card-extra {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+}
+
+.ant-card-body {
+  background: #2a2d3e !important;
+  color: #ffffff !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+.ant-card-meta-title {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.ant-card-meta-description {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+}
+
+/* Dashboard Card Titles */
+.dashboard-card-title {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid #35395a !important;
+}
+
+/* Dashboard Card Labels */
+.dashboard-card-label {
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* Dashboard Card Values */
+.dashboard-card-value {
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+/* Force dashboard card values to be white with higher specificity */
+.ant-card .dashboard-card-value,
+.ant-card .categoryValue,
+.ant-card .activityValue,
+.ant-card .animeName,
+.ant-card .animeViews,
+.ant-card .animeRating {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Ant Design Statistic dark theme */
+.ant-statistic-title {
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.ant-statistic-content {
+  color: #ffffff !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+.ant-statistic-content-value {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Ant Design Table (globalized) */
+.ant-table {
+  background: transparent;
+}
+
+/* Table scroll'u kaldır */
+.ant-table-wrapper .ant-table {
+  height: 100%;
+}
+
+.ant-table-body {
+  overflow: hidden !important;
+}
+
+.ant-table-container {
+  height: 100%;
+}
+
+.ant-table-thead > tr > th {
+  background: #23263a !important;
+  border-bottom: 2px solid #35395a !important;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ant-table-tbody > tr > td {
+  background: #1a1d2e !important;
+  border-bottom: 1px solid #2a2d3e !important;
+  padding: 16px 12px;
+  color: #fff;
+}
+/* Hover kaldırıldı */
+
+/* Fix table corner artifacts (white arcs) */
+.ant-table-wrapper .ant-table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent !important;
+}
+.ant-table-container::before,
+.ant-table-container::after {
+  display: none !important;
+}
+.ant-table-wrapper .ant-table,
+.ant-table-wrapper .ant-table-content,
+.ant-table-wrapper .ant-table-body {
+  background: transparent !important;
+}
+.ant-table-content::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* Ant Design Menu (globalized from Sidebar.module.css) */
+.ant-menu,
+.ant-menu-sub,
+.ant-menu-item,
+.ant-menu-submenu,
+.ant-menu-submenu-title,
+.ant-menu-item-selected,
+.ant-menu-item-active,
+.ant-menu-item:hover,
+.ant-menu-submenu-active,
+.ant-menu-submenu-selected,
+.ant-menu-submenu-title:hover {
+  color: #fff !important;
+  background: none !important;
+}
+.ant-menu-item,
+.ant-menu-submenu-title {
+  border-bottom: 1.5px solid #ad8eff !important;
+}
+.ant-menu-submenu .ant-menu-item {
+  position: relative;
+  padding-left: 36px !important;
+  display: flex;
+  align-items: center;
+  border-bottom: none !important;
+}
+.ant-menu-submenu .ant-menu-item::before {
+  content: "";
+  display: inline-block;
+  width: 4px !important;
+  height: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 4px !important;
+  max-height: 4px !important;
+  border-radius: 50%;
+  background: #ad8eff;
+  margin-right: 8px;
+  flex-shrink: 0;
+  box-sizing: content-box !important;
+  vertical-align: middle;
+}
+.ant-menu-submenu .ant-menu-item.ant-menu-item-selected::before {
+  content: "";
+  display: inline-block;
+  width: 4px !important;
+  height: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 4px !important;
+  max-height: 4px !important;
+  border-radius: 50%;
+  background: #4ade80;
+  margin-right: 8px;
+  flex-shrink: 0;
+  box-sizing: content-box !important;
+  vertical-align: middle;
+}
+
+/* Ant Design Spin (globalized from Loading.module.css) */
+.ant-spin-dot-item {
+  background-color: #2b3043 !important;
+}
+
+/* Darken AntD table loading overlay to prevent white flash */
+.ant-spin-nested-loading > .ant-spin-container::after {
+  background: rgba(
+    24,
+    28,
+    39,
+    0.75
+  ) !important; /* dark mask instead of white */
+}
+.ant-spin-nested-loading > div > .ant-spin {
+  color: #bfc9da !important;
+}
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-dot-item {
+  background-color: #bfc9da !important;
+}
+
+/* Ensure AntD Image never flashes white */
+.ant-image,
+.ant-image-img {
+  background: transparent !important;
+}
+
+/* Table empty/placeholder row should stay dark */
+.ant-table-placeholder .ant-table-cell {
+  background: #1a1d2e !important;
+  color: #bfc9da !important;
+}
+
+/* Ant Design Tabs dark theme */
+.ant-tabs {
+  background: transparent !important;
+}
+
+.ant-tabs-tab {
+  background: #2a2d3e !important;
+  border: 1px solid #35395a !important;
+  color: #bfc9da !important;
+  border-radius: 8px 8px 0 0 !important;
+  margin-right: 4px !important;
+  padding: 12px 20px !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-tabs-tab:hover {
+  background: #35395a !important;
+  color: #ffffff !important;
+  border-color: #4f5b7a !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active {
+  background: #4f8cff !important;
+  border-color: #4f8cff !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.ant-tabs-tab-btn {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+.ant-tabs-content-holder {
+  background: transparent !important;
+}
+
+.ant-tabs-nav {
+  border-bottom: none !important;
+}
+
+.ant-tabs-nav::before {
+  display: none !important;
+}
+
+.ant-tabs-ink-bar {
+  display: none !important;
+}
+
+/* Table header styling - prevent text wrapping and ensure proper alignment */
+.ant-table-thead > tr > th {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  vertical-align: middle !important;
+  padding: 12px 8px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  background: #2a2d3e !important;
+  border-bottom: 1px solid #35395a !important;
+}
+
+/* Table cell content alignment */
+.ant-table-tbody > tr > td {
+  vertical-align: middle !important;
+  padding: 12px 8px !important;
+  border-bottom: 1px solid #35395a !important;
+}
+
+/* Ensure table content doesn't wrap unnecessarily */
+.ant-table-cell {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Allow specific columns to wrap if needed (like comment content) */
+.ant-table-cell[data-column-key="content"] {
+  white-space: normal !important;
+  max-width: 300px !important;
+}

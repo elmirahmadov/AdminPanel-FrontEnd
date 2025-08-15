@@ -1,0 +1,39 @@
+.tableCard {
+  background: #1a1d2e;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.table {
+  background: transparent;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nameText {
+  color: #fff;
+  font-weight: 600;
+}
+
+.nameTag {
+  margin: 0;
+}
+
+.descriptionText {
+  color: #D1D5DB;
+}
+
+.actionButton {
+  border-radius: 6px;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 24px;
+}

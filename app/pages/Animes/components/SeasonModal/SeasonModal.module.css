@@ -1,0 +1,104 @@
+.modalBody {
+  background: #23263a;
+  color: #fff;
+  padding: 24px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.seasonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.seasonTitle {
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+}
+
+.seasonList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.seasonCard {
+  background: #23263a;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #35395a;
+}
+
+.episodeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.episodeHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.episodeTitle {
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+  transition: color 0.15s ease;
+}
+.episodeTitle:hover {
+  color: #dbeafe;
+}
+
+.episodeList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.episodeCard {
+  background: #23263a;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #35395a;
+}
+
+.episodeMetaDescription {
+  color: #bfc9da;
+  font-size: 12px;
+}
+
+.seasonMetaDescription {
+  color: #bfc9da;
+}
+
+/* Make season name more prominent in list */
+.seasonName {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.pagination {
+  margin-top: auto;
+  padding-top: 16px;
+  text-align: center;
+}
+
+.buttonPrimary {
+  background: #4f8cff;
+  border: none;
+}
+
+.buttonOutlined {
+  background: transparent;
+  border: 1px solid #4a5474;
+  color: #fff;
+}

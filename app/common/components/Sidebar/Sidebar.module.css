@@ -1,0 +1,956 @@
+/* Anime Temalı Sidebar Tasarımı */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 260px;
+  background-color: rgba(16, 17, 28, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #d4d5e2;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: none !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-right: none;
+  transition: opacity 0.3s ease;
+  padding-top: 80px;
+}
+
+/* Gif background container - Ana div'in arkasına eklenir */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(
+    --sidebar-background,
+    url("../../../assets/images/anime-background.gif")
+  );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none;
+  filter: brightness(0.5) contrast(1.1) blur(4px);
+  background-color: rgba(0, 0, 0, 0.15);
+  background-blend-mode: darken;
+}
+
+/* Sakura yaprakları efekti */
+.sakuraPetals {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.petal {
+  position: absolute;
+  background-color: rgba(255, 183, 197, 0.7);
+  border-radius: 150% 0 150% 0;
+  animation: falling-petals 10s linear infinite;
+}
+
+@keyframes falling-petals {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Logo alanı */
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 20, 60, 0.7),
+    rgba(25, 15, 45, 0.5)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin-bottom: 5px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.logo::after,
+.logo::before {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Anime tarzı logo efekti */
+.logo::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: shine 5s infinite linear;
+  z-index: 0;
+}
+
+@keyframes shine {
+  0% {
+    transform: rotate(0deg) scale(1.5) translateX(-100%);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.5) translateX(100%);
+  }
+}
+
+.logoIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  position: relative;
+  box-shadow: none !important;
+  animation: none !important;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(147, 112, 219, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(186, 85, 211, 0.8);
+  }
+}
+
+.logoIcon:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 25px rgba(186, 85, 211, 0.8);
+}
+
+.logo h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: none !important;
+  transition: all 0.3s ease;
+  z-index: 1;
+  font-family: "Quicksand", sans-serif;
+  background: transparent !important;
+}
+
+.logo h1::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(147, 112, 219, 0.8), transparent);
+  transition: width 0.3s ease;
+}
+
+.logo:hover h1::after {
+  width: 100%;
+}
+
+/* Navigasyon alanı */
+.navigation {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 10px 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 40, 0.35) 0%,
+    rgba(25, 22, 50, 0.25) 100%
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+}
+
+.navigation > ul > li {
+  margin-bottom: 6px;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Menü öğesi */
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: #e2e3f1;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  transition: none;
+  overflow: hidden;
+  background: transparent !important;
+  background-color: rgba(20, 20, 35, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: none !important;
+  border-bottom: 1.5px solid #ad8eff !important;
+}
+
+.menuItem::before,
+.menuItem::after {
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+.menuItem:hover {
+  color: #ffffff;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: rgba(30, 25, 55, 0.7);
+}
+
+/* Aktif menü öğesi */
+.active .menuItem {
+  background: linear-gradient(
+    90deg,
+    rgba(49, 35, 92, 0.85),
+    rgba(58, 43, 102, 0.7)
+  );
+  color: #ffffff;
+  border-left: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+.active .menuItem::before,
+.active .menuItem::after {
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+.expanded .menuItem {
+  color: #ffffff;
+}
+/* İkonlar */
+.icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  color: currentColor;
+  position: relative;
+  z-index: 1;
+  transition: none;
+  background: transparent !important;
+  filter: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+.active .icon {
+  color: #d0a9ff;
+  filter: drop-shadow(0 0 5px rgba(208, 169, 255, 0.7));
+}
+
+.menuItem:hover .icon {
+  color: #d0a9ff;
+  filter: drop-shadow(0 0 5px rgba(208, 169, 255, 0.5));
+}
+
+.menuTitle {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  transition: none;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  background: transparent !important;
+}
+
+.menuItem:hover .menuTitle {
+  transform: translateX(2px);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: none;
+  background: transparent !important;
+}
+
+.expanded .arrow svg {
+  transform: rotate(90deg);
+  color: #d0a9ff;
+}
+
+.menuItem:hover .arrow {
+  color: #d0a9ff;
+}
+
+/* Alt menü stili */
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 15px;
+  background: transparent !important;
+  border-radius: 0 0 10px 10px;
+  transition: none;
+  opacity: 0;
+  backdrop-filter: none !important;
+  width: calc(100%);
+  transform-origin: top;
+  clip-path: inset(0 0 100% 0);
+  border-left: none !important;
+  background-color: rgba(35, 32, 58, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.submenu.open {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  clip-path: inset(0 0 0 0);
+  transition: none;
+  background: transparent !important;
+}
+
+.submenuItem {
+  display: block;
+  padding: 11px 15px 11px 45px;
+  color: #d4d5e2;
+  text-decoration: none;
+  font-size: 14px;
+  transition: none;
+  position: relative;
+  margin: 2px 5px;
+  border-radius: 8px;
+  background: transparent !important;
+  background-color: rgba(20, 20, 35, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: none !important;
+}
+
+.submenuItem::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: #ad8eff;
+  display: block;
+}
+
+.submenuItem:hover {
+  color: #ffffff;
+  background: transparent !important;
+  transform: none !important;
+  background-color: rgba(30, 25, 55, 0.5);
+}
+
+.activeSubmenu .submenuItem {
+  color: #ffffff;
+  background: transparent !important;
+}
+
+.activeSubmenu .submenuItem::before {
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+/* Alt menü animasyonu */
+.submenu.open li {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInSlideUp 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu.open li:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.submenu.open li:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.submenu.open li:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.submenu.open li:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.submenu.open li:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* Sidebar alt kısmı */
+.sidebarFooter {
+  padding: 18px;
+  border-top: none !important;
+  margin-top: auto;
+  position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  background: linear-gradient(
+    0deg,
+    rgba(20, 18, 40, 0.7),
+    rgba(25, 22, 50, 0.5)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.sidebarFooter::before {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: #e2e3f1;
+  background: transparent !important;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: none;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  background-color: rgba(75, 65, 120, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.logoutButton::before,
+.logoutButton::after {
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+.logoutButton:hover {
+  color: #ffabab;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: rgba(75, 54, 95, 0.45);
+}
+
+.logoutButton .icon {
+  margin-right: 14px;
+  transition: none;
+  background: transparent !important;
+  color: inherit;
+}
+
+.logoutButton:hover .icon {
+  color: #ffabab;
+  background: transparent !important;
+  transform: none !important;
+}
+
+.logoutButton span:not(.icon) {
+  transition: none;
+}
+
+.logoutButton:hover span:not(.icon) {
+  transform: none !important;
+}
+
+/* Responsive tasarım */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 230px;
+  }
+
+  .logo {
+    padding: 18px 15px;
+  }
+
+  .logoIcon {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* 3D ve derinlik efektleri */
+.navigation > ul > li {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.menuItem,
+.submenuItem,
+.logoutButton {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Başlangıç animasyonu için yeni stil - sayfa arası geçişlere göre optimize edildi */
+@keyframes fadeInStaggered {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.loaded .navigation > ul > li {
+  opacity: 0;
+  animation: fadeInStaggered 0.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.loaded .navigation > ul > li:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.loaded .navigation > ul > li:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.loaded .navigation > ul > li:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.loaded .navigation > ul > li:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.loaded .navigation > ul > li:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.loaded .navigation > ul > li:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.loaded .navigation > ul > li:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.loaded .navigation > ul > li:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+/* Focus states */
+.menuItem:focus-visible,
+.submenuItem:focus-visible,
+.logoutButton:focus-visible {
+  outline: 2px solid #ad8eff;
+  outline-offset: 2px;
+}
+
+/* Hover efektleri */
+.menuItem:hover {
+  transform: translateX(3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Anime stil efekti */
+.active .menuItem {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Menü seçimi glow efekti */
+.active .menuItem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(147, 112, 219, 0.2), transparent);
+  opacity: 1;
+}
+
+/* Arka plan seçici stili */
+.bgSelector {
+  background-color: rgba(35, 37, 64, 0.95);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 0 15px 15px;
+  border: 1px solid rgba(147, 112, 219, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.bgSelector h2 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  color: #e2e3f1;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.bgOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.bgOption {
+  background-color: rgba(41, 43, 74, 0.5);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bgOption:hover {
+  background-color: rgba(56, 58, 102, 0.7);
+  transform: translateY(-2px);
+}
+
+.activeBg {
+  border-color: #ad8eff;
+  background-color: rgba(76, 69, 135, 0.6);
+  box-shadow: 0 0 15px rgba(147, 112, 219, 0.2);
+}
+
+.bgPreview {
+  width: 100%;
+  height: 60px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(147, 112, 219, 0.2);
+  overflow: hidden;
+}
+
+.bgOption span {
+  font-size: 11px;
+  color: #d4d5e2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* Arka plan görselleri için anime tarz animasyonlar */
+@keyframes pulsate {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes floatingIcons {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.icon svg {
+  animation: floatingIcons 3s ease infinite;
+}
+
+/* Her ikona farklı animasyon zamanlaması ver */
+li:nth-child(1) .icon svg {
+  animation-delay: 0s;
+}
+li:nth-child(2) .icon svg {
+  animation-delay: 0.4s;
+}
+li:nth-child(3) .icon svg {
+  animation-delay: 0.8s;
+}
+li:nth-child(4) .icon svg {
+  animation-delay: 1.2s;
+}
+li:nth-child(5) .icon svg {
+  animation-delay: 1.6s;
+}
+li:nth-child(6) .icon svg {
+  animation-delay: 2s;
+}
+li:nth-child(7) .icon svg {
+  animation-delay: 2.4s;
+}
+li:nth-child(8) .icon svg {
+  animation-delay: 2.8s;
+}
+
+/* Sakura yaprakları için özel stil */
+.petal {
+  position: absolute;
+  background-color: rgba(255, 183, 197, 0.7);
+  border-radius: 150% 0 150% 0;
+  filter: drop-shadow(0 0 5px rgba(255, 183, 197, 0.5));
+  animation: falling-petals 10s linear infinite;
+}
+
+/* Aktif menü için yanal glow efekti */
+.active .menuItem {
+  animation: sideGlow 2s infinite alternate;
+}
+
+@keyframes sideGlow {
+  from {
+    box-shadow: -3px 0 15px rgba(147, 112, 219, 0.2);
+  }
+  to {
+    box-shadow: -3px 0 25px rgba(147, 112, 219, 0.5);
+  }
+}
+
+/* Logo için özel anime-style parlama efekti */
+.logo::after {
+  animation: shimmerLine 3s infinite linear;
+}
+
+@keyframes shimmerLine {
+  0% {
+    background-position: -200px;
+  }
+  100% {
+    background-position: 200px;
+  }
+}
+
+/* Çıkış düğmesi için anime stil hover efekti */
+.logoutButton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 128, 128, 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.logoutButton:hover::after {
+  opacity: 1;
+  animation: wave 2s infinite linear;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Menü öğeleri için özel vurgu efekti */
+.menuItem::before {
+  animation: gradientShift 8s infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(to bottom, #9c6dff, #ff8de3);
+  }
+  50% {
+    background: linear-gradient(to bottom, #ff8de3, #70a1ff);
+  }
+  100% {
+    background: linear-gradient(to bottom, #70a1ff, #9c6dff);
+  }
+}
+
+/* Mobil duyarlılık için ek stil */
+@media (max-width: 576px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .menuTitle {
+    font-size: 14px;
+  }
+
+  .submenuItem {
+    font-size: 13px;
+    padding: 10px 15px 10px 42px;
+  }
+
+  .bgOptions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar,
+.logo,
+.menuItem,
+.submenuItem,
+.sidebarFooter,
+.logoutButton,
+.menuTitle {
+  color: #fff !important;
+}
+
+:global(.ant-menu),
+:global(.ant-menu-sub),
+:global(.ant-menu-item),
+:global(.ant-menu-submenu),
+:global(.ant-menu-submenu-title),
+:global(.ant-menu-item-selected),
+:global(.ant-menu-item-active),
+:global(.ant-menu-item:hover),
+:global(.ant-menu-submenu-active),
+:global(.ant-menu-submenu-selected),
+:global(.ant-menu-submenu-title:hover) {
+  color: #fff !important;
+  background: none !important;
+}
+
+.menuItem,
+.submenuItem {
+  border-bottom: 1.5px solid #ad8eff !important;
+  background: none !important;
+}
+
+:global(.ant-menu-item),
+:global(.ant-menu-submenu-title) {
+  border-bottom: 1.5px solid #ad8eff !important;
+}
+
+:global(.ant-menu-submenu .ant-menu-item) {
+  position: relative;
+  padding-left: 36px !important;
+  display: flex;
+  align-items: center;
+  border-bottom: none !important;
+}
+
+:global(.ant-menu-submenu .ant-menu-item)::before {
+  content: "";
+  display: inline-block;
+  width: 4px !important;
+  height: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 4px !important;
+  max-height: 4px !important;
+  border-radius: 50%;
+  background: #ad8eff;
+  margin-right: 8px;
+  flex-shrink: 0;
+  box-sizing: content-box !important;
+  vertical-align: middle;
+}
+
+:global(.ant-menu-submenu .ant-menu-item.ant-menu-item-selected)::before {
+  content: "";
+  display: inline-block;
+  width: 4px !important;
+  height: 4px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 4px !important;
+  max-height: 4px !important;
+  border-radius: 50%;
+  background: #4ade80;
+  margin-right: 8px;
+  flex-shrink: 0;
+  box-sizing: content-box !important;
+  vertical-align: middle;
+}

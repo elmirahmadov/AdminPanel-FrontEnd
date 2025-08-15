@@ -1,0 +1,56 @@
+.container {
+  padding: 16px;
+  min-height: 100vh;
+}
+
+.dashboard {
+  margin-bottom: 24px;
+}
+
+.tableContainer {
+  overflow: visible;
+  min-height: 400px;
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure table maintains layout */
+.tableContainer :global(.ant-table-wrapper) {
+  min-height: 400px;
+}
+
+.tableContainer :global(.ant-table) {
+  min-height: 400px;
+}
+
+.tableContainer :global(.ant-table-container) {
+  min-height: 400px;
+}
+
+.tableContainer :global(.ant-table-body) {
+  min-height: 300px;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 1200px) {
+  .tableContainer {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableContainer {
+    min-height: 300px;
+    padding-bottom: 16px;
+  }
+
+  .tableContainer :global(.ant-table-wrapper),
+  .tableContainer :global(.ant-table),
+  .tableContainer :global(.ant-table-container) {
+    min-height: 300px;
+  }
+
+  .tableContainer :global(.ant-table-body) {
+    min-height: 200px;
+  }
+}

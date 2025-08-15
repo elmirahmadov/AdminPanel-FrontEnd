@@ -1,0 +1,96 @@
+.modal {
+  border-radius: 8px;
+}
+
+.formItem {
+  margin-bottom: 16px;
+}
+
+.ratingField {
+  margin-bottom: 16px;
+}
+
+.statusField {
+  margin-bottom: 16px;
+}
+
+.moderationModal .ant-alert {
+  margin-bottom: 16px;
+}
+
+.moderationModal .ant-divider {
+  margin: 16px 0;
+}
+
+.modalContent {
+  margin-bottom: 16px;
+}
+
+.modalContent:last-child {
+  margin-bottom: 0;
+}
+
+.modalLabel {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.modalText {
+  color: inherit;
+}
+
+.modalCommentBox {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #35395a;
+  border-radius: 6px;
+  background: #1a1d2e;
+}
+
+.modalStats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modalLikeCount {
+  color: #52c41a;
+}
+
+.modalDislikeCount {
+  color: #ff4d4f;
+}
+
+.modalTags {
+  margin-top: 8px;
+}
+
+.modalTag {
+  margin-right: 8px;
+}
+
+.modalTag:last-child {
+  margin-right: 0;
+}
+
+/* Form specific styles */
+.formContainer {
+  padding: 16px 0;
+}
+
+.formField {
+  margin-bottom: 16px;
+}
+
+.formField:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modalStats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

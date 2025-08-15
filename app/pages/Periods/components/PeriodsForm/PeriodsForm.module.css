@@ -1,0 +1,112 @@
+.formContainer {
+  padding: 0;
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.formItem {
+  flex: 1;
+}
+
+.formItem .ant-form-item-label > label {
+  color: #e8eaed;
+  font-weight: 500;
+}
+
+.formItem .ant-input,
+.formItem .ant-input-number,
+.formItem .ant-select-selector,
+.formItem .ant-picker {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+  border-radius: 6px;
+}
+
+.formItem .ant-input:focus,
+.formItem .ant-input-number:focus,
+.formItem .ant-select-selector:focus,
+.formItem .ant-picker:focus {
+  border-color: #4f8cff;
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+}
+
+.formItem .ant-input:hover,
+.formItem .ant-input-number:hover,
+.formItem .ant-select-selector:hover,
+.formItem .ant-picker:hover {
+  border-color: #4f8cff;
+}
+
+.formItem .ant-select-dropdown {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+}
+
+.formItem .ant-select-item {
+  color: #e8eaed;
+}
+
+.formItem .ant-select-item-option-selected {
+  background: #4f8cff;
+}
+
+.formItem .ant-select-item-option-active {
+  background: #2a2d3e;
+}
+
+.formItem .ant-picker-dropdown {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+}
+
+.formItem .ant-picker-panel {
+  background: #1a1d2e;
+}
+
+.formItem .ant-picker-header {
+  border-bottom: 1px solid #353b4a;
+}
+
+.formItem .ant-picker-content th,
+.formItem .ant-picker-content td {
+  color: #e8eaed;
+}
+
+.formItem .ant-picker-cell:hover .ant-picker-cell-inner {
+  background: #4f8cff;
+}
+
+.formItem .ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #4f8cff;
+}
+
+.descriptionItem {
+  margin-bottom: 16px;
+}
+
+.descriptionItem .ant-form-item-label > label {
+  color: #e8eaed;
+  font-weight: 500;
+}
+
+.descriptionItem .ant-input {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+  border-radius: 6px;
+  min-height: 80px;
+}
+
+.descriptionItem .ant-input:focus {
+  border-color: #4f8cff;
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+}
+
+.descriptionItem .ant-input:hover {
+  border-color: #4f8cff;
+}

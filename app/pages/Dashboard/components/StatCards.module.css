@@ -1,0 +1,62 @@
+.statCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  flex: 1;
+  min-width: 200px;
+  background: #2a2d3e;
+  border: 1px solid #35395a;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.statIcon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.statLabel {
+  composes: dashboard-card-label from global;
+  margin-bottom: 8px;
+  display: block;
+  color: #ffffff !important;
+}
+
+.statValue {
+  composes: dashboard-card-value from global;
+  font-size: 28px;
+  font-weight: 700;
+  display: block;
+  color: #ffffff !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .statCardsContainer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .statCard {
+    min-width: auto;
+    padding: 16px;
+  }
+
+  .statValue {
+    font-size: 24px;
+  }
+}

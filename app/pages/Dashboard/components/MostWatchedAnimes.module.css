@@ -1,0 +1,66 @@
+.mostWatchedContainer {
+  background: #2a2d3e;
+  border: 1px solid #35395a;
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+}
+
+.mostWatchedTitle {
+  composes: dashboard-card-title from global;
+  display: flex;
+  align-items: center;
+}
+
+.mostWatchedIcon {
+  color: #faad14 !important;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.mostWatchedList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mostWatchedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2d3e;
+}
+
+.mostWatchedItem:last-child {
+  border-bottom: none;
+}
+
+.animeName {
+  composes: dashboard-card-label from global;
+  color: #ffffff !important;
+}
+
+.animeViews {
+  composes: dashboard-card-value from global;
+  color: #ffffff !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mostWatchedContainer {
+    padding: 16px;
+  }
+
+  .mostWatchedItem {
+    padding: 10px 0;
+  }
+
+  .animeName {
+    font-size: 13px;
+  }
+
+  .animeViews {
+    font-size: 14px;
+  }
+}

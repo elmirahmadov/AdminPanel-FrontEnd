@@ -1,0 +1,335 @@
+.animeListContainer {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Table Styles */
+.tableContainer {
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.animeTable {
+  background: transparent;
+}
+
+.tableRow {
+  transition: all 0.2s ease;
+}
+
+/* Equal spacing and alignment tweaks */
+.animeTable :global(.ant-table-thead > tr > th),
+.animeTable :global(.ant-table-tbody > tr > td) {
+  text-align: center;
+  vertical-align: middle;
+}
+.animeTable :global(.ant-table-thead > tr > th:first-child),
+.animeTable :global(.ant-table-tbody > tr > td:first-child) {
+  text-align: center;
+}
+.titleCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.genresCell {
+  display: flex;
+  justify-content: center;
+}
+
+/* Sıkı satır yüksekliği */
+.animeTable :global(.ant-table-tbody > tr > td),
+.animeTable :global(.ant-table-thead > tr > th) {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Cover Cell */
+.coverCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coverWrapper {
+  width: 72px;
+  height: 84px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1d2e;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  border: none;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+/* Ensure AntD Image fills wrapper without letterboxing */
+.coverWrapper :global(.ant-image) {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.coverWrapper :global(.ant-image-img) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+}
+
+.coverImage {
+  width: 100% !important;
+  height: 100% !important;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.coverImage:hover {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+.noImage {
+  width: 72px;
+  height: 84px;
+  background: #2a2d3e;
+  border: 1px dashed #4a5474;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Title Cell */
+.titleCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+.titleText {
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.slugText {
+  font-size: 12px;
+  color: #6b7280;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Rating Cell */
+.ratingCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ratingStars {
+  color: #fbbf24;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.ratingNumber {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Genres Cell */
+.genresCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.genreTag {
+  margin: 0;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.moreGenres {
+  margin: 0;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.noGenres {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Action Buttons */
+.actionButton {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Uniform icon button row */
+.actionRow {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.iconBtn:hover {
+  transform: translateY(-1px);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.deleteBtn {
+  background: #473b4a !important;
+  border-color: #473b4a !important;
+}
+
+.deleteBtn:hover {
+  background: #7c3e47 !important;
+  border-color: #7c3e47 !important;
+}
+
+.starBtn {
+  background: #3a3f54 !important;
+  border-color: #3a3f54 !important;
+}
+
+.starActive {
+  background: #4a3f2a !important;
+  border-color: #4a3f2a !important;
+}
+
+/* Filter Bar */
+.filterBar {
+  display: flex;
+  gap: 16px;
+}
+
+.filterInput {
+  background: #23263a;
+  color: #fff;
+  border: 1.5px solid #4a5474;
+  border-radius: 8px;
+  font-size: 15px;
+  padding: 8px 12px;
+  height: 44px;
+  box-shadow: none;
+}
+
+.filterSelect {
+  background: #23263a;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  height: 44px;
+  width: 180px;
+}
+
+.addButton {
+  background: #4f8cff;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  height: 44px;
+}
+
+.filterBarRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Pagination */
+.paginationTop {
+  margin: 0;
+}
+
+.featuredToggle {
+  background: #23263a;
+  color: #fff;
+  border-color: #4a5474;
+}
+
+.featuredToggle:hover {
+  background: #2a2d3e;
+  color: #fff;
+  border-color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .animeListContainer {
+    padding: 16px;
+  }
+
+  .filterBarRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .animeListContainer {
+    padding: 12px;
+  }
+
+  .tableContainer {
+    border-radius: 8px;
+  }
+
+  .animeTable :global(.ant-table-thead > tr > th),
+  .animeTable :global(.ant-table-tbody > tr > td) {
+    padding: 12px 8px;
+  }
+}

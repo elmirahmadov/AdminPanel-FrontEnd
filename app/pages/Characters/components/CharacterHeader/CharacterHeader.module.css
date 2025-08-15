@@ -1,0 +1,30 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  width: 320px;
+}
+
+.addButton {
+  background: #4f8cff !important;
+  border-color: #4f8cff !important;
+  border-radius: 10px !important;
+  height: 40px;
+  padding: 0 16px !important;
+  font-weight: 500;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.addButton:hover {
+  background: #6ba1ff !important;
+  border-color: #6ba1ff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}

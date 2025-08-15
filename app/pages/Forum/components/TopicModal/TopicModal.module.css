@@ -1,0 +1,33 @@
+.modal {
+  border-radius: 8px;
+}
+
+.form {
+  margin-top: 16px;
+}
+
+.formItem {
+  margin-bottom: 16px;
+}
+
+.submitButton {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.submitButton:hover {
+  background: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.cancelButton {
+  border-color: #d9d9d9;
+  color: #595959;
+}
+
+.cancelButton:hover {
+  border-color: #40a9ff;
+  color: #40a9ff;
+}
+
+

@@ -1,0 +1,280 @@
+.tableContainer {
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid #353b4a;
+}
+
+/* Table Header Styling */
+.tableContainer .ant-table-thead > tr > th {
+  background: #23263a;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  font-weight: 600;
+  padding: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+}
+
+/* Table Body Styling */
+.tableContainer .ant-table-tbody > tr > td {
+  background: #1a1d2e;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  padding: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.tableContainer .ant-table-tbody > tr:hover > td {
+  background: #2a2d3e;
+}
+
+.titleCell {
+  max-width: 250px;
+  overflow: hidden;
+}
+
+.titleText {
+  font-weight: 600;
+  color: #4f8cff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+  background: rgba(79, 140, 255, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(79, 140, 255, 0.2);
+}
+
+.titleText:hover {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.categoryTag {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border: none;
+  background: #4f8cff;
+  color: white;
+}
+
+.descriptionCell {
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.descriptionText {
+  color: #8b9dc3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  padding: 4px 8px;
+  background: rgba(139, 157, 195, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(139, 157, 195, 0.2);
+}
+
+.statusSwitch {
+  background: #4f8cff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.3);
+  transition: all 0.3s ease;
+  width: 50px !important;
+  height: 24px !important;
+  min-width: 50px !important;
+  padding: 0 !important;
+}
+
+.statusSwitch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(79, 140, 255, 0.4);
+}
+
+.statusSwitch.ant-switch-checked {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.statusSwitch.ant-switch-checked:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Modern Switch Track */
+.statusSwitch .ant-switch-inner {
+  background: transparent !important;
+  border: none !important;
+  height: 20px !important;
+  line-height: 20px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+}
+
+/* Override Ant Design's default positioning */
+.statusSwitch .ant-switch-inner::before,
+.statusSwitch .ant-switch-inner::after {
+  display: none !important;
+}
+
+.statusSwitch.ant-switch-checked .ant-switch-inner {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Modern Switch Handle */
+.statusSwitch .ant-switch-handle {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 2px solid #4f8cff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+  width: 16px !important;
+  height: 16px !important;
+  top: 0px !important;
+  left: 0px !important;
+  position: absolute !important;
+  transform: none !important;
+}
+
+.statusSwitch.ant-switch-checked .ant-switch-handle {
+  border-color: #10b981 !important;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3) !important;
+  left: 24px !important;
+}
+
+.statusSwitch:hover .ant-switch-handle {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Switch Container Centering */
+.statusSwitchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+/* Force override Ant Design's switch positioning */
+.statusSwitchContainer .ant-switch {
+  position: relative !important;
+}
+
+.statusSwitchContainer .ant-switch .ant-switch-inner {
+  position: relative !important;
+}
+
+.statusSwitchContainer .ant-switch .ant-switch-handle {
+  position: absolute !important;
+  top: 1px !important;
+  left: 1px !important;
+  transform: none !important;
+}
+
+/* Override Ant Design's default handle positioning */
+.statusSwitchContainer .ant-switch.ant-switch-checked .ant-switch-handle {
+  left: 24px !important;
+  transform: none !important;
+}
+
+/* Ultra aggressive override for Ant Design */
+.statusSwitchContainer .ant-switch .ant-switch-handle,
+.statusSwitchContainer .ant-switch.ant-switch-checked .ant-switch-handle {
+  top: 0px !important;
+  transform: none !important;
+  transition: left 0.3s ease !important;
+}
+
+/* Override any inline styles */
+.statusSwitchContainer .ant-switch .ant-switch-handle[style] {
+  top: 0px !important;
+  transform: none !important;
+}
+
+/* Maximum specificity override */
+.tableContainer .statusSwitchContainer .ant-switch .ant-switch-handle,
+.tableContainer
+  .statusSwitchContainer
+  .ant-switch.ant-switch-checked
+  .ant-switch-handle {
+  top: 0px !important;
+  transform: none !important;
+  position: absolute !important;
+}
+
+.topicCount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b9dc3;
+  padding: 4px 8px;
+  background: rgba(79, 140, 255, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(79, 140, 255, 0.2);
+}
+
+.topicIcon {
+  color: #4f8cff;
+  font-size: 14px;
+}
+
+.actionButton {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination Styling */
+.tableContainer .ant-pagination {
+  background: #23263a;
+  padding: 16px;
+  border-top: 1px solid #353b4a;
+}
+
+.tableContainer .ant-pagination .ant-pagination-item {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+}
+
+.tableContainer .ant-pagination .ant-pagination-item:hover {
+  background: #2a2d3e;
+  border-color: #4f8cff;
+}
+
+.tableContainer .ant-pagination .ant-pagination-item-active {
+  background: #4f8cff;
+  border-color: #4f8cff;
+  color: white;
+}
+
+.tableContainer .ant-pagination .ant-pagination-prev,
+.tableContainer .ant-pagination .ant-pagination-next {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+}
+
+.tableContainer .ant-pagination .ant-pagination-prev:hover,
+.tableContainer .ant-pagination .ant-pagination-next:hover {
+  background: #2a2d3e;
+  border-color: #4f8cff;
+  color: #4f8cff;
+}

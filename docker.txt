@@ -1,0 +1,25 @@
+Summary of Important Docker Commands
+Images:
+docker images: List all Docker images.
+docker pull <image_name>: Pull an image from a registry.
+
+Containers:
+docker ps: List running containers.
+docker ps -a: List all containers, including stopped ones.
+docker start <container_id_or_name>: Start a stopped container.
+docker stop <container_id_or_name>: Stop a running container.
+docker rm <container_id_or_name>: Remove a stopped container.
+docker exec -it <container_id_or_name> /bin/bash: Access a running container.
+
+Networks:
+docker network ls: List Docker networks.
+docker network create <network_name>: Create a new Docker network.
+Volumes:
+
+docker volume ls: List Docker volumes.
+docker volume create <volume_name>: Create a new Docker volume.
+
+
+docker-compose down
+docker-compose build
+docker-compose up

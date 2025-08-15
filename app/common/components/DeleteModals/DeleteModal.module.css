@@ -1,0 +1,84 @@
+.modalWrapper {
+  --modal-border-radius: 16px;
+  --primary-green: #92d871;
+  --primary-green-hover: #72b155;
+}
+
+.modalWrapper :global(.ant-modal-content) {
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px 50px 10px;
+  background-color: white;
+  text-align: center;
+  justify-content: center;
+}
+
+.deleteImage {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.message {
+  width: 40%;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.buttonsWrapper {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.confirmButton {
+  width: 100%;
+  max-width: 200px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 10px !important;
+
+  background-color: var(--primary-green) !important;
+  border-color: var(--primary-green) !important;
+  color: white !important;
+
+  transition: all 0.2s ease-in-out !important;
+}
+
+.confirmButton:hover,
+.confirmButton:focus {
+  background-color: var(--primary-green-hover) !important;
+  border-color: var(--primary-green-hover) !important;
+}
+
+.cancelButton {
+  width: 100%;
+  max-width: 200px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 10px !important;
+
+  background-color: white !important;
+  border-color: #e8e8e8 !important;
+  color: #595959 !important;
+
+  transition: all 0.2s ease-in-out !important;
+}
+
+.cancelButton:hover,
+.cancelButton:focus {
+  background-color: #f9f9f9 !important;
+  border-color: #d9d9d9 !important;
+}

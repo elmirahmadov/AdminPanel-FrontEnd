@@ -1,0 +1,272 @@
+.app {
+  min-height: 100vh;
+  height: 100vh; /* Sabit yükseklik ver */
+  background: #21233e;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Floating Particles */
+.particlesContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 6s infinite linear;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Animated Background */
+.animatedBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sakuraPetals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.sakuraPetal {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  border-radius: 50% 0 50% 50%;
+  animation: sakuraFall 8s infinite linear;
+  opacity: 0.7;
+}
+
+@keyframes sakuraFall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Particle Animation Variations */
+.particle:nth-child(odd) {
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(even) {
+  animation-duration: 10s;
+  animation-delay: 2s;
+}
+
+.particle:nth-child(3n) {
+  animation-duration: 12s;
+  animation-delay: 4s;
+}
+
+/* Sakura Petal Variations */
+.sakuraPetal:nth-child(odd) {
+  animation-duration: 10s;
+  left: 10%;
+}
+
+.sakuraPetal:nth-child(even) {
+  animation-duration: 12s;
+  left: 80%;
+}
+
+.sakuraPetal:nth-child(3n) {
+  animation-duration: 8s;
+  left: 50%;
+}
+
+.sakuraPetal:nth-child(4n) {
+  animation-duration: 15s;
+  left: 20%;
+}
+
+.sakuraPetal:nth-child(5n) {
+  animation-duration: 11s;
+  left: 70%;
+}
+
+.header {
+  width: 100%;
+  height: 70px;
+  background: transparent !important;
+  box-shadow: none !important;
+  z-index: 222;
+  display: flex;
+  align-items: center;
+  padding: 0 40px !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-shrink: 0; /* Header'ın boyutunu sabitle */
+}
+
+.bodyArea {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 70px); /* Header yüksekliğini çıkar */
+  margin-top: 70px; /* Header için margin */
+  min-height: 0; /* Flex shrinking için kritik */
+}
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
+  background: transparent !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-shrink: 0; /* Sidebar'ın boyutunu sabitle */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0; /* Flex shrinking için kritik */
+  min-height: 0; /* Flex shrinking için kritik */
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0; /* Flex shrinking için kritik */
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.content {
+  flex: 1;
+  height: 100%; /* Container'ın tam yüksekliğini al */
+  min-height: 0; /* Flex shrinking için kritik */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 20px;
+  margin: 0;
+  position: relative;
+  background: transparent;
+}
+
+/* Scrollbar Styling */
+.content::-webkit-scrollbar {
+  width: 8px;
+  background: rgba(42, 42, 64, 0.8);
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.8);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.9);
+}
+
+.content::-webkit-scrollbar-track {
+  background: rgba(42, 42, 64, 0.3);
+  border-radius: 4px;
+}
+
+/* Sidebar Scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+  background: rgba(42, 42, 64, 0.6);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.6);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bodyArea {
+    flex-direction: column;
+    height: calc(100vh - 70px);
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+  }
+
+  .mainArea {
+    flex: 1;
+    min-height: 0;
+  }
+}

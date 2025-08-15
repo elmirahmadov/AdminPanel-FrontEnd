@@ -1,0 +1,309 @@
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.animeCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.episodeCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.episodeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.seasonText {
+  font-size: 11px;
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+.episodeText {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.animeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.animeTitle {
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+}
+
+.episodeBadge {
+  background: #1890ff;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.animeBadge {
+  background: #52c41a;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.animeText {
+  color: #fff;
+}
+
+.animeTag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentCell {
+  /* Container for content and edited tag */
+}
+
+.spoilerTag {
+  margin-bottom: 4px;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.commentText {
+  color: #ffffff;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border: 1px solid #35395a;
+  border-radius: 6px;
+  background: #1a1d2e;
+  max-width: 200px;
+  word-break: break-word;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editedTag {
+  flex-shrink: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.dateCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.likesCell {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.likeCount {
+  color: #52c41a;
+}
+
+.dislikeCount {
+  color: #ff4d4f;
+}
+
+.actionsCell {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionsCell :global(.ant-btn) {
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.actionsCell :global(.ant-btn:hover) {
+  transform: translateY(-1px);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.deleteButton {
+  background: #722ed1 !important;
+  border-color: #722ed1 !important;
+}
+
+.deleteButton:hover {
+  background: #9254de !important;
+  border-color: #9254de !important;
+}
+
+.userAvatar {
+  background-color: #1890ff;
+}
+
+/* Table specific styles */
+.tableContainer {
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+}
+
+/* Tablo scroll'u kaldır */
+.tableContainer :global(.ant-table) {
+  min-height: 400px;
+  background: transparent;
+}
+
+.tableContainer :global(.ant-table-body) {
+  overflow: auto !important;
+  min-height: 300px;
+}
+
+.tableContainer :global(.ant-table-container) {
+  min-height: 400px;
+  background: transparent;
+}
+
+.tableContainer :global(.ant-table-wrapper) {
+  min-height: 400px;
+  background: transparent;
+}
+
+/* Table header styles */
+.tableContainer :global(.ant-table-thead > tr > th) {
+  background: #2a2d3e !important;
+  border-bottom: 1px solid #35395a !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 16px 12px !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Table body styles */
+.tableContainer :global(.ant-table-tbody > tr > td) {
+  background: transparent !important;
+  border-bottom: 1px solid #35395a !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 12px !important;
+}
+
+.tableContainer :global(.ant-table-tbody > tr:hover > td) {
+  background: #2a2d3e !important;
+}
+
+/* Pagination styles */
+.tableContainer :global(.ant-pagination) {
+  background: #2a2d3e;
+  padding: 16px;
+  border-top: 1px solid #35395a;
+  margin: 0;
+}
+
+.tableContainer :global(.ant-pagination-item) {
+  background: #1a1d2e;
+  border-color: #35395a;
+  color: #ffffff;
+}
+
+.tableContainer :global(.ant-pagination-item-active) {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.tableContainer :global(.ant-pagination-prev),
+.tableContainer :global(.ant-pagination-next) {
+  background: #1a1d2e;
+  border-color: #35395a;
+  color: #ffffff;
+}
+
+.tableContainer :global(.ant-pagination-options) {
+  color: #ffffff;
+}
+
+.tableContainer :global(.ant-select-selector) {
+  background: #1a1d2e !important;
+  border-color: #35395a !important;
+  color: #ffffff !important;
+}
+
+/* Empty state styles */
+.tableContainer :global(.ant-empty) {
+  color: #8c8c8c;
+}
+
+.tableContainer :global(.ant-empty-description) {
+  color: #8c8c8c;
+}
+
+/* Loading styles */
+.tableContainer :global(.ant-spin-container) {
+  min-height: 300px;
+}
+
+.tableContainer :global(.ant-spin-dot-item) {
+  background-color: #1890ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .commentText {
+    max-width: 150px;
+  }
+}

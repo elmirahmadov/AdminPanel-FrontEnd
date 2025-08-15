@@ -1,0 +1,144 @@
+.tableContainer {
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  margin-top: 16px;
+}
+
+.periodsTable {
+  background: transparent;
+}
+
+.periodsTable .ant-table-thead > tr > th {
+  background: #23263a;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  font-weight: 600;
+  padding: 16px;
+  text-align: center;
+}
+
+.periodsTable .ant-table-tbody > tr > td {
+  background: #1a1d2e;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  padding: 16px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.periodsTable .ant-table-tbody > tr:hover > td {
+  background: #2a2d3e;
+}
+
+.idTag {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clickableName {
+  font-weight: 500;
+  color: #4f8cff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.clickableName:hover {
+  background: rgba(79, 140, 255, 0.1);
+  color: #10b981;
+  transform: scale(1.05);
+}
+
+.animeCount {
+  font-weight: 600;
+  color: #10b981;
+}
+
+.totalEpisodes {
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.descriptionCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.descriptionText {
+  color: #a0a0a0;
+  font-size: 12px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editButton {
+  color: #3b82f6;
+  transition: all 0.2s ease;
+}
+
+.editButton:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: scale(1.1);
+}
+
+.deleteButton {
+  color: #ef4444;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(1.1);
+}
+
+.addAnimeButton {
+  color: #10b981;
+  transition: all 0.2s ease;
+}
+
+.addAnimeButton:hover {
+  background: rgba(16, 185, 129, 0.1);
+  transform: scale(1.1);
+}
+.periodsTable .ant-pagination-item {
+  background: #23263a;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+}
+
+.periodsTable .ant-pagination-item:hover {
+  background: #2a2d3e;
+  border-color: #4f8cff;
+}
+
+.periodsTable .ant-pagination-item-active {
+  background: #4f8cff;
+  border-color: #4f8cff;
+}
+
+.periodsTable .ant-pagination-prev,
+.periodsTable .ant-pagination-next {
+  background: #23263a;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+}
+
+.periodsTable .ant-pagination-prev:hover,
+.periodsTable .ant-pagination-next:hover {
+  background: #2a2d3e;
+  border-color: #4f8cff;
+}

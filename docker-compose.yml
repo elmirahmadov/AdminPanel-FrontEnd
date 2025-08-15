@@ -1,0 +1,12 @@
+services:
+  app:
+    env_file: .env.production
+    container_name: ${APP_CONTAINER}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      APP_PORT: ${APP_PORT}
+    ports:
+      - '${APP_PORT}:${APP_PORT}'

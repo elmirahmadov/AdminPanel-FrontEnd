@@ -1,0 +1,78 @@
+.topRatedContainer {
+  background: #2a2d3e;
+  border: 1px solid #35395a;
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+}
+
+.topRatedTitle {
+  composes: dashboard-card-title from global;
+  display: flex;
+  align-items: center;
+}
+
+.topRatedIcon {
+  color: #faad14 !important;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.topRatedList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topRatedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2d3e;
+}
+
+.topRatedItem:last-child {
+  border-bottom: none;
+}
+
+.animeName {
+  composes: dashboard-card-label from global;
+  color: #ffffff !important;
+}
+
+.animeRating {
+  composes: dashboard-card-value from global;
+  display: flex;
+  align-items: center;
+  color: #ffffff !important;
+}
+
+.ratingStar {
+  color: #faad14 !important;
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .topRatedContainer {
+    padding: 16px;
+  }
+
+  .topRatedItem {
+    padding: 10px 0;
+  }
+
+  .animeName {
+    font-size: 13px;
+  }
+
+  .animeRating {
+    font-size: 14px;
+  }
+
+  .ratingStar {
+    font-size: 12px;
+  }
+}

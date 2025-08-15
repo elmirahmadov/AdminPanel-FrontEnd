@@ -1,0 +1,22 @@
+.tableContainer {
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Tablo hücre yazı limiti */
+:global(.ant-table-cell) {
+  max-width: 150px !important;
+  overflow: hidden !important;
+}
+
+:global(.ant-table-cell .cellContent) {
+  max-width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+}

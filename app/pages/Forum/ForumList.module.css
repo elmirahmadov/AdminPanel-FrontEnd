@@ -1,0 +1,243 @@
+.container {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Konular Görünümü */
+.topicsView {
+  background: #1a1d2e;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #353b4a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.topicsHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #353b4a;
+}
+
+.backButton {
+  background: #4f8cff;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background: #3b7ae8;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.topicsHeader h2 {
+  color: #e8eaed;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.topicsTable {
+  background: #23263a;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #353b4a;
+}
+
+.topicsTableComponent {
+  background: transparent;
+}
+
+.topicsTableComponent .ant-table-thead > tr > th {
+  background: #1a1d2e;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  font-weight: 600;
+  padding: 16px;
+}
+
+.topicsTableComponent .ant-table-tbody > tr > td {
+  background: #23263a;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  padding: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.topicsTableComponent .ant-table-tbody > tr:hover > td {
+  background: #2a2d3e;
+}
+
+.topicTitleCell {
+  font-weight: 500;
+  color: #4f8cff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.topicTitleCell:hover {
+  color: #10b981;
+}
+
+.authorCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(79, 140, 255, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(79, 140, 255, 0.2);
+}
+
+.authorAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #4f8cff;
+}
+
+.replyCountCell,
+.viewCountCell,
+.dateCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b9dc3;
+  padding: 4px 8px;
+  background: rgba(139, 157, 195, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(139, 157, 195, 0.2);
+}
+
+.replyCountCell {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.viewCountCell {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.dateCell {
+  color: #8b9dc3;
+  background: rgba(139, 157, 195, 0.1);
+  border-color: rgba(139, 157, 195, 0.2);
+}
+
+.statusCell {
+  display: flex;
+  gap: 4px;
+}
+
+.statusCell .ant-tag {
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 2px 8px;
+  border: none;
+}
+
+.statusCell .ant-tag.ant-tag-green {
+  background: #10b981;
+  color: white;
+}
+
+.statusCell .ant-tag.ant-tag-red {
+  background: #ef4444;
+  color: white;
+}
+
+.noTopics {
+  text-align: center;
+  padding: 40px;
+  color: #8b9dc3;
+  font-size: 16px;
+  background: rgba(35, 38, 58, 0.5);
+  border-radius: 8px;
+  border: 1px dashed #353b4a;
+}
+
+.topicsActions {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 40px;
+  color: #8b9dc3;
+  font-size: 16px;
+}
+
+.actionsCell {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.actionsCell .ant-btn {
+  font-size: 11px;
+  padding: 4px 8px;
+  height: 32px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  color: #8b9dc3;
+  background: rgba(139, 157, 195, 0.1);
+  border-color: rgba(139, 157, 195, 0.2);
+}
+
+.actionsCell .ant-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: rgba(139, 157, 195, 0.2);
+  border-color: rgba(139, 157, 195, 0.4);
+}
+
+/* Aktif durumlar için özel renkler */
+.actionsCell .ant-btn.pinnedButton {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.actionsCell .ant-btn.pinnedButton:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.6);
+}
+
+.actionsCell .ant-btn.lockedButton {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.actionsCell .ant-btn.lockedButton:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.actionsCell .ant-btn.stickyButton {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.actionsCell .ant-btn.stickyButton:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: rgba(245, 158, 11, 0.6);
+}

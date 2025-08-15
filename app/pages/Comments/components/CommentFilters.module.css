@@ -1,0 +1,164 @@
+.header {
+  margin-bottom: 16px;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.searchGroup {
+  flex: 1;
+}
+
+.searchInput {
+  min-width: 300px;
+}
+
+.actionGroup {
+  flex-shrink: 0;
+}
+
+.exportButton {
+  color: #52c41a;
+  border-color: #52c41a;
+}
+
+.addCommentButton {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.filterButton {
+  background: #722ed1;
+  border-color: #722ed1;
+  color: white;
+}
+
+.filterButton:hover {
+  background: #9254de;
+  border-color: #9254de;
+}
+
+/* Filter Drawer Styles */
+.filterDrawer {
+  background: #1a1d2e;
+}
+
+.filterDrawer :global(.ant-drawer-header) {
+  background: #2a2d3e;
+  border-bottom: 1px solid #35395a;
+}
+
+.filterDrawer :global(.ant-drawer-title) {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.filterDrawer :global(.ant-drawer-close) {
+  color: #ffffff;
+}
+
+.filterDrawer :global(.ant-drawer-body) {
+  background: #1a1d2e;
+  padding: 24px;
+}
+
+.filterDrawer :global(.ant-drawer-footer) {
+  background: #2a2d3e;
+  border-top: 1px solid #35395a;
+  padding: 16px 24px;
+}
+
+.filtersForm {
+  padding: 0;
+}
+
+.filtersForm :global(.ant-form-item) {
+  margin-bottom: 20px;
+}
+
+.filtersForm :global(.ant-form-item-label > label) {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.filtersForm :global(.ant-select-selector) {
+  background: #2a2d3e !important;
+  border: 1px solid #35395a !important;
+  color: #ffffff !important;
+}
+
+.filtersForm :global(.ant-select-selection-placeholder) {
+  color: #8c8c8c !important;
+}
+
+.filtersForm :global(.ant-select-arrow) {
+  color: #8c8c8c !important;
+}
+
+.filtersForm :global(.ant-picker) {
+  background: #2a2d3e !important;
+  border: 1px solid #35395a !important;
+  color: #ffffff !important;
+}
+
+.filtersForm :global(.ant-picker-input > input) {
+  color: #ffffff !important;
+}
+
+.filtersForm :global(.ant-picker-input > input::placeholder) {
+  color: #8c8c8c !important;
+}
+
+.filtersForm :global(.ant-picker-separator) {
+  color: #8c8c8c !important;
+}
+
+.filtersForm :global(.ant-picker-suffix) {
+  color: #8c8c8c !important;
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resetButton {
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+.resetButton:hover {
+  color: #ff7875;
+  border-color: #ff7875;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .searchContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .searchGroup {
+    order: 2;
+  }
+
+  .actionGroup {
+    order: 1;
+    justify-content: center;
+  }
+
+  .searchInput {
+    min-width: 100%;
+  }
+
+  .filterDrawer {
+    width: 100% !important;
+  }
+}

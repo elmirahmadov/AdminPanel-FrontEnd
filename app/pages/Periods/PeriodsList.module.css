@@ -1,0 +1,246 @@
+.container {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Anime List View Styles */
+.animeListView {
+  background: #1a1d2e;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #353b4a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.animeListHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #353b4a;
+}
+
+.backButton {
+  background: #4f8cff;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background: #3b7ae8;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.animeListTitle {
+  color: #e8eaed;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.animeListStats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #23263a;
+  border-radius: 8px;
+  border: 1px solid #353b4a;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.statItem span:first-child {
+  color: #a0a0a0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statItem span:last-child {
+  color: #4f8cff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.animeTableContainer {
+  background: #23263a;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #353b4a;
+}
+
+.animeTable {
+  background: transparent;
+}
+
+.animeTable .ant-table-thead > tr > th {
+  background: #1a1d2e;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  font-weight: 600;
+  padding: 16px;
+}
+
+.animeTable .ant-table-tbody > tr > td {
+  background: #23263a;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  padding: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.animeTable .ant-table-tbody > tr:hover > td {
+  background: #2a2d3e;
+}
+
+.animeTitle {
+  color: #4f8cff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.animeTitle:hover {
+  color: #10b981;
+}
+
+/* Modal Styles */
+.modal {
+  color: #e8eaed;
+}
+
+.modal .ant-modal-header {
+  background: #1a1d2e;
+  border-bottom: 1px solid #353b4a;
+}
+
+.modal .ant-modal-title {
+  color: #e8eaed;
+}
+
+.modal .ant-modal-body {
+  background: #23263a;
+  padding: 24px;
+}
+
+.modal .ant-modal-footer {
+  background: #1a1d2e;
+  border-top: 1px solid #353b4a;
+}
+
+.modal .ant-form-item-label > label {
+  color: #e8eaed;
+}
+
+.modal .ant-input,
+.modal .ant-input-number,
+.modal .ant-select-selector,
+.modal .ant-picker {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+  color: #e8eaed;
+}
+
+.modal .ant-input:focus,
+.modal .ant-input-number:focus,
+.modal .ant-select-selector:focus,
+.modal .ant-picker:focus {
+  border-color: #4f8cff;
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+}
+
+.modal .ant-input:hover,
+.modal .ant-input-number:hover,
+.modal .ant-select-selector:hover,
+.modal .ant-picker:hover {
+  border-color: #4f8cff;
+}
+
+.modal .ant-select-dropdown {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+}
+
+.modal .ant-select-item {
+  color: #e8eaed;
+}
+
+.modal .ant-select-item-option-selected {
+  background: #4f8cff;
+}
+
+.modal .ant-select-item-option-active {
+  background: #2a2d3e;
+}
+
+.modal .ant-picker-dropdown {
+  background: #1a1d2e;
+  border: 1px solid #353b4a;
+}
+
+.modal .ant-picker-panel {
+  background: #1a1d2e;
+}
+
+.modal .ant-picker-header {
+  border-bottom: 1px solid #353b4a;
+}
+
+.modal .ant-picker-content th,
+.modal .ant-picker-content td {
+  color: #e8eaed;
+}
+
+.modal .ant-picker-cell:hover .ant-picker-cell-inner {
+  background: #4f8cff;
+}
+
+.modal .ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #4f8cff;
+}
+
+/* Button Styles */
+.submitButton {
+  background: #4f8cff;
+  border-color: #4f8cff;
+  border-radius: 8px;
+  height: 40px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  background: #3b7ae8;
+  border-color: #3b7ae8;
+  transform: translateY(-1px);
+}
+
+.cancelButton {
+  background: #6b7280;
+  border-color: #6b7280;
+  border-radius: 8px;
+  height: 40px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: #4b5563;
+  border-color: #4b5563;
+  transform: translateY(-1px);
+}
