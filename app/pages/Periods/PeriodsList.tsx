@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import {
+  ArrowLeftOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Form,
@@ -13,14 +17,15 @@ import {
   message,
 } from "antd";
 
-import { lookupAnime } from "../../../services/api/anime.api";
-
 import PeriodsForm from "./components/PeriodsForm";
 import PeriodsHeader from "./components/PeriodsHeader";
 import PeriodsTable from "./components/PeriodsTable";
 import styles from "./PeriodsList.module.css";
 
 import { type IPeriod, usePeriodsStore } from "@/common/store/periods";
+import DeleteModal from "@/common/components/DeleteModals/DeleteModal";
+import { Loading } from "@/common/components/Loading";
+import { lookupAnime } from "../../../services/api/anime.api";
 
 const PeriodsList: React.FC = () => {
   const {
@@ -36,6 +41,8 @@ const PeriodsList: React.FC = () => {
 
   const [animeSearch, setAnimeSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletingPeriod, setDeletingPeriod] = useState<IPeriod | null>(null);
   const [editing, setEditing] = useState<IPeriod | null>(null);
   const [viewingAnimes, setViewingAnimes] = useState<IPeriod | null>(null);
   const [addAnimeModalOpen, setAddAnimeModalOpen] = useState(false);
@@ -58,6 +65,11 @@ const PeriodsList: React.FC = () => {
     // Tüm dönemleri getir
     fetchAllPeriods();
   }, [fetchAllPeriods]);
+
+  // Loading durumunda Loading component'ini göster
+  if (loading && !viewingAnimes) {
+    return <Loading />;
+  }
 
   const openAdd = () => {
     setEditing(null);
@@ -88,8 +100,22 @@ const PeriodsList: React.FC = () => {
     form.resetFields();
   };
 
-  const onDelete = async (period: IPeriod) => {
-    await deletePeriod(period.id);
+  const onDelete = (period: IPeriod) => {
+    setDeletingPeriod(period);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (deletingPeriod) {
+      await deletePeriod(deletingPeriod.id);
+      setDeleteModalOpen(false);
+      setDeletingPeriod(null);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalOpen(false);
+    setDeletingPeriod(null);
   };
 
   const onViewAnimes = async (period: IPeriod) => {
@@ -180,8 +206,8 @@ const PeriodsList: React.FC = () => {
   if (viewingAnimes) {
     return (
       <div className={styles.container}>
-        <div className={styles.animeListView}>
-          <div className={styles.animeListHeader}>
+        <div className={styles.episodesView}>
+          <div className={styles.episodesHeader}>
             <Button
               icon={<ArrowLeftOutlined />}
               onClick={onBackToPeriods}
@@ -189,65 +215,101 @@ const PeriodsList: React.FC = () => {
             >
               Mevsimlere Dön
             </Button>
-            <h2 className={styles.animeListTitle}>
-              {viewingAnimes.name} - Anime Listesi
-            </h2>
-            <div className={styles.animeListStats}>
-              <span className={styles.statItem}>
-                <strong>Toplam Anime:</strong> {viewingAnimes.animeCount}
-              </span>
-              <span className={styles.statItem}>
-                <strong>Toplam Bölüm:</strong> {viewingAnimes.episodeCount}
-              </span>
-            </div>
+            <h2>{viewingAnimes.name} - Bölümler</h2>
           </div>
 
-          <div className={styles.animeTableContainer}>
-            <Table
-              dataSource={viewingAnimes.animes}
-              rowKey="id"
-              pagination={false}
-              className={styles.animeTable}
-              columns={[
-                {
-                  title: "ID",
-                  dataIndex: "id",
-                  key: "id",
-                  width: 80,
-                  render: (text: number) => <Tag color="blue">{text}</Tag>,
-                },
-                {
-                  title: "Anime Adı",
-                  dataIndex: "title",
-                  key: "title",
-                  width: 300,
-                  render: (text: string) => (
-                    <span className={styles.animeTitle}>{text}</span>
-                  ),
-                },
-                {
-                  title: "Bölüm Sayısı",
-                  dataIndex: "seasons",
-                  key: "episodeCount",
-                  width: 120,
-                  render: (seasons: any[]) => {
-                    const totalEpisodes =
-                      seasons?.reduce((total, season) => {
-                        return total + (season.episodes?.length || 0);
-                      }, 0) || 0;
-                    return <Tag color="green">{totalEpisodes}</Tag>;
+          {viewingAnimes.animes && viewingAnimes.animes.length > 0 ? (
+            <div className={styles.episodesTable}>
+              <Table
+                columns={[
+                  {
+                    title: "Anime Adı",
+                    dataIndex: "title",
+                    key: "title",
+                    width: 300,
+                    render: (title: string, record: any) => (
+                      <div className={styles.animeTitleCell}>
+                        <span className={styles.animeTitle}>{title}</span>
+                        <Tag
+                          color={
+                            record.status === "ONGOING"
+                              ? "green"
+                              : record.status === "COMPLETED"
+                                ? "blue"
+                                : "orange"
+                          }
+                        >
+                          {record.status === "ONGOING"
+                            ? "Devam Ediyor"
+                            : record.status === "COMPLETED"
+                              ? "Tamamlandı"
+                              : "Yakında"}
+                        </Tag>
+                      </div>
+                    ),
                   },
-                },
-                {
-                  title: "Yayın Yılı",
-                  dataIndex: "releaseYear",
-                  key: "releaseYear",
-                  width: 120,
-                  render: (year: number) => <Tag color="blue">{year}</Tag>,
-                },
-              ]}
-            />
-          </div>
+                  {
+                    title: "Bölüm Sayısı",
+                    dataIndex: "episodeCount",
+                    key: "episodeCount",
+                    width: 120,
+                    render: (count: number) => (
+                      <div className={styles.episodeCountCell}>
+                        <Tag color="green">{count}</Tag>
+                      </div>
+                    ),
+                  },
+                  {
+                    title: "Durum",
+                    dataIndex: "status",
+                    key: "status",
+                    width: 120,
+                    render: (status: string) => (
+                      <div className={styles.statusCell}>
+                        <Tag
+                          color={
+                            status === "ONGOING"
+                              ? "green"
+                              : status === "COMPLETED"
+                                ? "blue"
+                                : "orange"
+                          }
+                        >
+                          {status === "ONGOING"
+                            ? "Devam Ediyor"
+                            : status === "COMPLETED"
+                              ? "Tamamlandı"
+                              : "Yakında"}
+                        </Tag>
+                      </div>
+                    ),
+                  },
+                  {
+                    title: "İşlemler",
+                    key: "actions",
+                    width: 150,
+                    render: (_: unknown, record: any) => (
+                      <div className={styles.actionsCell}>
+                        <Button
+                          icon={<DeleteOutlined />}
+                          className={`${styles.iconBtn} ${styles.deleteBtn}`}
+                          title="Sil"
+                        />
+                      </div>
+                    ),
+                  },
+                ]}
+                dataSource={viewingAnimes.animes}
+                rowKey="id"
+                pagination={false}
+                className={styles.episodesTableComponent}
+              />
+            </div>
+          ) : (
+            <div className={styles.noEpisodes}>
+              <p>Bu mevsimde henüz anime bulunmuyor.</p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -262,7 +324,7 @@ const PeriodsList: React.FC = () => {
       />
       <PeriodsTable
         periods={periods}
-        loading={loading}
+        loading={false}
         onEdit={openEdit}
         onDelete={onDelete}
         onViewAnimes={onViewAnimes}
@@ -352,6 +414,12 @@ const PeriodsList: React.FC = () => {
           </Form.Item>
         </div>
       </Modal>
+
+      <DeleteModal
+        open={deleteModalOpen}
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 };

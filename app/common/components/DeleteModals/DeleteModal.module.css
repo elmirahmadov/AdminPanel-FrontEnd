@@ -1,37 +1,99 @@
 .modalWrapper {
-  --modal-border-radius: 16px;
-  --primary-green: #92d871;
-  --primary-green-hover: #72b155;
+  --modal-border-radius: 18px;
+  --primary-purple: #8b5cf6;
+  --primary-purple-hover: #7c3aed;
+  --primary-green: #10b981;
+  --primary-green-hover: #059669;
+  --danger-red: #ef4444;
+  --danger-red-hover: #dc2626;
+  --dark-bg: #23263a;
+  --darker-bg: #1a1d2e;
+  --border-color: #35395a;
 }
 
 .modalWrapper :global(.ant-modal-content) {
+  background: var(--dark-bg) !important;
+  border-radius: var(--modal-border-radius) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid var(--border-color) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.modalWrapper :global(.ant-modal-content)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(16, 185, 129, 0.1) 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
 }
 
 .modalContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 10px 50px 10px;
-  background-color: white;
+  padding: 40px 30px 40px 30px;
+  background: transparent;
   text-align: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
-.deleteImage {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #bfc9da 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-purple), var(--primary-green));
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
 }
 
 .message {
-  width: 40%;
+  width: 100%;
+  max-width: 400px;
   margin: 0;
   padding: 0;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 1.4;
-  color: #333;
-  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #bfc9da;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .buttonsWrapper {
@@ -39,46 +101,135 @@
   display: flex;
   gap: 20px;
   justify-content: center;
+  position: relative;
+}
+
+.buttonsWrapper::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
 }
 
 .confirmButton {
   width: 100%;
-  max-width: 200px;
-  height: 48px;
-  font-weight: 500;
+  max-width: 180px;
+  height: 50px;
+  font-weight: 600;
   font-size: 16px;
-  border-radius: 10px !important;
-
-  background-color: var(--primary-green) !important;
-  border-color: var(--primary-green) !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, var(--danger-red), #f87171) !important;
+  border: none !important;
   color: white !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
 
-  transition: all 0.2s ease-in-out !important;
+.confirmButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.confirmButton:hover::before {
+  left: 100%;
 }
 
 .confirmButton:hover,
 .confirmButton:focus {
-  background-color: var(--primary-green-hover) !important;
-  border-color: var(--primary-green-hover) !important;
+  background: linear-gradient(135deg, var(--danger-red-hover), #ef4444) !important;
+  box-shadow: 0 6px 25px rgba(239, 68, 68, 0.5) !important;
+  transform: translateY(-2px);
 }
 
 .cancelButton {
   width: 100%;
-  max-width: 200px;
-  height: 48px;
-  font-weight: 500;
+  max-width: 180px;
+  height: 50px;
+  font-weight: 600;
   font-size: 16px;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, var(--darker-bg), #2a2d3e) !important;
+  border: 2px solid var(--border-color) !important;
+  color: #bfc9da !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
 
-  background-color: white !important;
-  border-color: #e8e8e8 !important;
-  color: #595959 !important;
+.cancelButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
 
-  transition: all 0.2s ease-in-out !important;
+.cancelButton:hover::before {
+  left: 100%;
 }
 
 .cancelButton:hover,
 .cancelButton:focus {
-  background-color: #f9f9f9 !important;
-  border-color: #d9d9d9 !important;
+  background: linear-gradient(135deg, #35395a, #4a5474) !important;
+  border-color: var(--primary-purple) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 25px rgba(139, 92, 246, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 30px 20px 30px 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .message {
+    font-size: 16px;
+    max-width: 350px;
+  }
+  
+  .buttonsWrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .confirmButton,
+  .cancelButton {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 25px 15px 25px 15px;
+  }
+  
+  .title {
+    font-size: 22px;
+  }
+  
+  .message {
+    font-size: 15px;
+    max-width: 300px;
+  }
 }

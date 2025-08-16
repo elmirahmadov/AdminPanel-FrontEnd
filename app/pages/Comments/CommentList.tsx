@@ -15,6 +15,8 @@ import CommentFilters from "./components/CommentFilters";
 import CommentModals from "./components/CommentModals";
 import CommentTable from "./components/CommentTable";
 
+import DeleteModal from "@/common/components/DeleteModals/DeleteModal";
+import { Loading } from "@/common/components/Loading";
 import { useCommentStore } from "@/common/store/comment/comment.store";
 import { useSeasonStore } from "@/common/store/season/season.store";
 import { useEpisodeStore } from "@/common/store/episode/episode.store";
@@ -59,9 +61,11 @@ const CommentList: React.FC = () => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isModerationModalVisible, setIsModerationModalVisible] =
     useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [editingComment, setEditingComment] = useState<IComment | null>(null);
   const [selectedCommentForModeration, setSelectedCommentForModeration] =
     useState<IComment | null>(null);
+  const [commentToDelete, setCommentToDelete] = useState<IComment | null>(null);
   const [animeOptions, setAnimeOptions] = useState<
     { value: string; label: string }[]
   >([]);
@@ -394,14 +398,31 @@ const CommentList: React.FC = () => {
     }
   };
 
-  const onDelete = async (comment: IComment) => {
+  const openDeleteModal = (comment: IComment) => {
+    setCommentToDelete(comment);
+    setIsDeleteModalVisible(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalVisible(false);
+    setCommentToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    if (!commentToDelete) return;
+
     try {
-      await removeComment(comment.id);
+      await removeComment(commentToDelete.id);
       message.success("Yorum başarıyla silindi!");
       fetchComments();
+      closeDeleteModal();
     } catch (error) {
       message.error("Yorum silinirken hata oluştu!");
     }
+  };
+
+  const onDelete = async (comment: IComment) => {
+    openDeleteModal(comment);
   };
 
   const onApprove = async (comment: IComment) => {
@@ -558,6 +579,11 @@ const CommentList: React.FC = () => {
     }
   };
 
+  // Loading durumunda Loading component'ini göster
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.container}>
       {/* Yorum İstatistikleri */}
@@ -656,6 +682,14 @@ const CommentList: React.FC = () => {
         episodeOptions={episodeOptions}
         onAnimeLookup={handleAnimeLookup}
         onSeasonChange={handleSeasonChange}
+      />
+
+      <DeleteModal
+        open={isDeleteModalVisible}
+        onCancel={closeDeleteModal}
+        onConfirm={handleDelete}
+        title="Yorum Silme Onayı"
+        message={`"${commentToDelete?.content?.substring(0, 50)}${commentToDelete?.content && commentToDelete.content.length > 50 ? "..." : ""}" yorumunu silmek istediğinizden emin misiniz?`}
       />
     </div>
   );

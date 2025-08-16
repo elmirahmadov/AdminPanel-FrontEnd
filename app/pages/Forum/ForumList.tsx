@@ -18,8 +18,11 @@ import ForumTable from "./components/ForumTable";
 import ReplyModal from "./components/ReplyModal/ReplyModal";
 import TopicModal from "./components/TopicModal/TopicModal";
 import styles from "./ForumList.module.css";
+
 import { useForumStore } from "../../common/store/forum";
 import type { IForum, ITopic } from "../../common/store/forum/forum.types";
+import DeleteModal from "@/common/components/DeleteModals/DeleteModal";
+import { Loading } from "@/common/components/Loading";
 
 const ForumList: React.FC = () => {
   const {
@@ -42,6 +45,8 @@ const ForumList: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<IForum | null>(null);
   const [viewing, setViewing] = useState<IForum | null>(null);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [forumToDelete, setForumToDelete] = useState<IForum | null>(null);
   const [form] = Form.useForm();
 
   // Topic and Reply modals
@@ -99,8 +104,29 @@ const ForumList: React.FC = () => {
     form.resetFields();
   };
 
+  const openDeleteModal = (forum: IForum) => {
+    setForumToDelete(forum);
+    setIsDeleteModalVisible(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalVisible(false);
+    setForumToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    if (!forumToDelete) return;
+
+    try {
+      await removeForum(forumToDelete.id);
+      closeDeleteModal();
+    } catch (error) {
+      console.error("Forum silinirken hata:", error);
+    }
+  };
+
   const onDelete = async (forum: IForum) => {
-    await removeForum(forum.id);
+    openDeleteModal(forum);
   };
 
   const onViewTopics = async (forum: IForum) => {
@@ -155,6 +181,11 @@ const ForumList: React.FC = () => {
   const onToggleStatus = async (forum: IForum, isActive: boolean) => {
     await editForum(forum.id, { isActive });
   };
+
+  // Loading durumunda Loading component'ini göster
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.container}>
@@ -401,6 +432,14 @@ const ForumList: React.FC = () => {
         topicId={selectedTopicId}
         editingReply={editingReply}
         mode={editingReply ? "edit" : "create"}
+      />
+
+      <DeleteModal
+        open={isDeleteModalVisible}
+        onCancel={closeDeleteModal}
+        onConfirm={handleDelete}
+        title="Forum Silme Onayı"
+        message={`"${forumToDelete?.title}" forumunu silmek istediğinizden emin misiniz?`}
       />
     </div>
   );
