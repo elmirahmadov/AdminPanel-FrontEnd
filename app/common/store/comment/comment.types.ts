@@ -57,6 +57,14 @@ export interface ICommentCreatePayload {
   isSpoiler?: boolean;
 }
 
+export interface ICommentUpdatePayload {
+  content?: string;
+  status?: "APPROVED" | "PENDING" | "REJECTED" | "HIDDEN";
+  seasonId?: number | null; // Optional for anime comments
+  episodeId?: number | null; // Optional for season comments
+  isSpoiler?: boolean;
+}
+
 export interface ICommentStore {
   comments: IComment[];
   loading: boolean;

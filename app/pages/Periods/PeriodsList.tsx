@@ -4,6 +4,7 @@ import {
   ArrowLeftOutlined,
   EditOutlined,
   DeleteOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -60,6 +61,14 @@ const PeriodsList: React.FC = () => {
     id: string;
     title: string;
   } | null>(null);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  // Anime list pagination state
+  const [animeCurrentPage, setAnimeCurrentPage] = useState(1);
+  const [animePageSize, setAnimePageSize] = useState(10);
 
   useEffect(() => {
     // Tüm dönemleri getir
@@ -122,9 +131,10 @@ const PeriodsList: React.FC = () => {
     try {
       const periodWithAnimes = await getPeriodById(period.id);
       setViewingAnimes(periodWithAnimes);
-    } catch (error) {
-      message.error("Dönem detayları yüklenirken hata oluştu!");
-    }
+      // Pagination state'lerini sıfırla
+      setAnimeCurrentPage(1);
+      setAnimePageSize(10);
+    } catch (error) {}
   };
 
   const onAddAnime = (period: IPeriod) => {
@@ -163,7 +173,6 @@ const PeriodsList: React.FC = () => {
       } catch (error) {
         console.error("Anime lookup error:", error);
         setAnimeOptions([]);
-        message.error("Anime arama sırasında hata oluştu!");
       }
     }, 300);
 
@@ -171,31 +180,45 @@ const PeriodsList: React.FC = () => {
   };
 
   const handleAnimeSelect = (animeId: string) => {
+    console.log("Anime selected:", animeId);
     const anime = animeOptions.find((option) => option.value === animeId);
     if (anime) {
       setSelectedAnime({ id: animeId, title: anime.label });
+      console.log("Selected anime set:", { id: animeId, title: anime.label });
     }
   };
 
   const handleAddAnimeToPeriod = async () => {
+    console.log("handleAddAnimeToPeriod called");
+    console.log("selectedAnime:", selectedAnime);
+    console.log("selectedPeriod:", selectedPeriod);
+
     if (!selectedAnime || !selectedPeriod) {
-      message.error("Lütfen bir anime seçin!");
+      console.log("Missing selectedAnime or selectedPeriod");
       return;
     }
 
     try {
-      const values = await addAnimeForm.validateFields();
-      const episodeCount = values.episodeCount || 0;
+      console.log("Adding anime to period:", {
+        periodId: selectedPeriod.id,
+        animeId: selectedAnime.id,
+        episodeCount: 0,
+      });
 
-      await addAnimeToPeriod(selectedPeriod.id, selectedAnime.id, episodeCount);
-      message.success(
-        `${selectedAnime.title} anime'si ${selectedPeriod.name} dönemine eklendi!`
-      );
+      await addAnimeToPeriod(selectedPeriod.id, selectedAnime.id, 0);
+      console.log("Anime added successfully");
+
       setAddAnimeModalOpen(false);
       setSelectedAnime(null);
       setAnimeOptions([]);
+      addAnimeForm.resetFields();
+
+      // Refresh the anime list
+      if (viewingAnimes) {
+        await onViewAnimes(viewingAnimes);
+      }
     } catch (error) {
-      message.error("Anime eklenirken hata oluştu!");
+      console.error("Error adding anime to period:", error);
     }
   };
 
@@ -208,14 +231,23 @@ const PeriodsList: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.episodesView}>
           <div className={styles.episodesHeader}>
+            <div className={styles.episodesHeaderLeft}>
+              <Button
+                icon={<ArrowLeftOutlined />}
+                onClick={onBackToPeriods}
+                className={styles.backButton}
+              >
+                Mevsimlere Dön
+              </Button>
+              <h2>{viewingAnimes.name} - Bölümler</h2>
+            </div>
             <Button
-              icon={<ArrowLeftOutlined />}
-              onClick={onBackToPeriods}
-              className={styles.backButton}
+              type="primary"
+              onClick={() => onAddAnime(viewingAnimes)}
+              icon={<PlusOutlined />}
             >
-              Mevsimlere Dön
+              Anime Ekle
             </Button>
-            <h2>{viewingAnimes.name} - Bölümler</h2>
           </div>
 
           {viewingAnimes.animes && viewingAnimes.animes.length > 0 ? (
@@ -250,14 +282,17 @@ const PeriodsList: React.FC = () => {
                   },
                   {
                     title: "Bölüm Sayısı",
-                    dataIndex: "episodeCount",
+                    dataIndex: "episodes",
                     key: "episodeCount",
                     width: 120,
-                    render: (count: number) => (
-                      <div className={styles.episodeCountCell}>
-                        <Tag color="green">{count}</Tag>
-                      </div>
-                    ),
+                    render: (episodes: any[]) => {
+                      const totalEpisodes = episodes ? episodes.length : 0;
+                      return (
+                        <div className={styles.episodeCountCell}>
+                          <Tag color="green">{totalEpisodes}</Tag>
+                        </div>
+                      );
+                    },
                   },
                   {
                     title: "Durum",
@@ -301,7 +336,16 @@ const PeriodsList: React.FC = () => {
                 ]}
                 dataSource={viewingAnimes.animes}
                 rowKey="id"
-                pagination={false}
+                pagination={{
+                  current: animeCurrentPage,
+                  pageSize: animePageSize,
+                  showSizeChanger: true,
+                  showQuickJumper: true,
+                  showTotal: (total, range) =>
+                    `${range[0]}-${range[1]} / ${total} anime`,
+                  onChange: setAnimeCurrentPage,
+                  onShowSizeChange: setAnimePageSize,
+                }}
                 className={styles.episodesTableComponent}
               />
             </div>
@@ -310,6 +354,55 @@ const PeriodsList: React.FC = () => {
               <p>Bu mevsimde henüz anime bulunmuyor.</p>
             </div>
           )}
+
+          {/* Anime Ekleme Modal - Sadece bu view'da açılır */}
+          <Modal
+            open={addAnimeModalOpen}
+            onCancel={() => {
+              setAddAnimeModalOpen(false);
+              setSelectedAnime(null);
+              setAnimeOptions([]);
+              addAnimeForm.resetFields();
+            }}
+            title={`${selectedPeriod?.name} - Anime Ekle`}
+            width={500}
+            footer={[
+              <Button
+                key="cancel"
+                onClick={() => {
+                  setAddAnimeModalOpen(false);
+                  setSelectedAnime(null);
+                  setAnimeOptions([]);
+                  addAnimeForm.resetFields();
+                }}
+              >
+                İptal
+              </Button>,
+              <Button
+                key="add"
+                type="primary"
+                onClick={handleAddAnimeToPeriod}
+                disabled={!selectedAnime}
+              >
+                Anime Ekle
+              </Button>,
+            ]}
+          >
+            <Form form={addAnimeForm} layout="vertical">
+              <Form.Item label="Anime Ara">
+                <Select
+                  showSearch
+                  placeholder="Anime ismi yazın..."
+                  filterOption={false}
+                  onSearch={handleAnimeLookup}
+                  onChange={handleAnimeSelect}
+                  options={animeOptions}
+                  notFoundContent="Anime bulunamadı"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+            </Form>
+          </Modal>
         </div>
       </div>
     );
@@ -329,6 +422,10 @@ const PeriodsList: React.FC = () => {
         onDelete={onDelete}
         onViewAnimes={onViewAnimes}
         onAddAnime={onAddAnime}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChange={setCurrentPage}
+        onPageSizeChange={setPageSize}
       />
       <Modal
         open={modalOpen}
@@ -339,80 +436,6 @@ const PeriodsList: React.FC = () => {
         width={600}
       >
         <PeriodsForm form={form} />
-      </Modal>
-
-      {/* Anime Ekleme Modal */}
-      <Modal
-        open={addAnimeModalOpen}
-        onCancel={() => {
-          setAddAnimeModalOpen(false);
-          setSelectedAnime(null);
-          setAnimeOptions([]);
-        }}
-        title={`${selectedPeriod?.name} - Anime Ekle`}
-        width={500}
-        footer={[
-          <Button
-            key="cancel"
-            onClick={() => {
-              setAddAnimeModalOpen(false);
-              setSelectedAnime(null);
-              setAnimeOptions([]);
-            }}
-          >
-            İptal
-          </Button>,
-          <Button
-            key="add"
-            type="primary"
-            onClick={handleAddAnimeToPeriod}
-            disabled={!selectedAnime}
-          >
-            Anime Ekle
-          </Button>,
-        ]}
-      >
-        <div style={{ marginBottom: 16 }}>
-          <Form.Item label="Anime Ara">
-            <Select
-              showSearch
-              placeholder="Anime ismi yazın..."
-              filterOption={false}
-              onSearch={handleAnimeLookup}
-              onChange={handleAnimeSelect}
-              options={animeOptions}
-              notFoundContent="Anime bulunamadı"
-              style={{ width: "100%" }}
-            />
-          </Form.Item>
-
-          {selectedAnime && (
-            <div
-              style={{
-                background: "#f5f5f5",
-                padding: 16,
-                borderRadius: 8,
-                marginBottom: 16,
-              }}
-            >
-              <h4>Seçilen Anime:</h4>
-              <p>
-                <strong>İsim:</strong> {selectedAnime.title}
-              </p>
-              <p>
-                <strong>ID:</strong> {selectedAnime.id}
-              </p>
-            </div>
-          )}
-
-          <Form.Item label="Bölüm Sayısı" name="episodeCount">
-            <InputNumber
-              placeholder="Bölüm sayısını girin..."
-              min={0}
-              style={{ width: "100%" }}
-            />
-          </Form.Item>
-        </div>
       </Modal>
 
       <DeleteModal

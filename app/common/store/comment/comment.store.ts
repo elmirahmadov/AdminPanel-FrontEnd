@@ -3,6 +3,7 @@ import type {
   IComment,
   ICommentStore,
   ICommentCreatePayload,
+  ICommentUpdatePayload,
 } from "./comment.types";
 import {
   getComments,
@@ -23,7 +24,7 @@ interface Store extends ICommentStore {
       user?: string;
     }) => Promise<void>;
     addComment: (data: ICommentCreatePayload) => Promise<void>;
-    editComment: (id: number, data: Partial<IComment>) => Promise<void>;
+    editComment: (id: number, data: ICommentUpdatePayload) => Promise<void>;
     removeComment: (id: number) => Promise<void>;
     approveComment: (id: number) => Promise<void>;
     rejectComment: (id: number) => Promise<void>;

@@ -50,10 +50,8 @@ const TopicModal: React.FC<TopicModalProps> = ({
 
       if (mode === "create") {
         await createTopic({ ...topicData, forumId });
-        message.success("Konu başarıyla oluşturuldu");
       } else {
         await updateTopic(editingTopic.id, topicData);
-        message.success("Konu başarıyla güncellendi");
       }
 
       form.resetFields();
@@ -63,9 +61,7 @@ const TopicModal: React.FC<TopicModalProps> = ({
       if (onSuccess) {
         onSuccess();
       }
-    } catch (error) {
-      message.error("Bir hata oluştu");
-    }
+    } catch (error) {}
   };
 
   return (

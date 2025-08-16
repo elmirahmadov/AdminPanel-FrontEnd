@@ -59,6 +59,14 @@ const ForumList: React.FC = () => {
   } | null>(null);
   const [selectedTopicId, setSelectedTopicId] = useState<string>("");
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  // Topics pagination state
+  const [topicsCurrentPage, setTopicsCurrentPage] = useState(1);
+  const [topicsPageSize, setTopicsPageSize] = useState(10);
+
   useEffect(() => {
     fetchForums();
     // Sadece forumları getir, konular forum seçildiğinde getirilecek
@@ -132,6 +140,9 @@ const ForumList: React.FC = () => {
   const onViewTopics = async (forum: IForum) => {
     setViewing(forum);
     await getTopicsByForum(forum.id); // Sadece bu forumun konularını getir
+    // Pagination state'lerini sıfırla
+    setTopicsCurrentPage(1);
+    setTopicsPageSize(10);
   };
 
   const onAddTopic = (forumId: string) => {
@@ -208,21 +219,24 @@ const ForumList: React.FC = () => {
           onDelete={onDelete}
           onViewTopics={onViewTopics}
           onToggleStatus={onToggleStatus}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+          onPageSizeChange={setPageSize}
         />
       ) : (
         <div className={styles.topicsView}>
           <div className={styles.topicsHeader}>
-            <Button
-              icon={<ArrowLeftOutlined />}
-              onClick={() => setViewing(null)}
-              className={styles.backButton}
-            >
-              Foruma Geri Dön
-            </Button>
-            <h2>{viewing.title} - Konular</h2>
-          </div>
-
-          <div className={styles.topicsActions}>
+            <div className={styles.topicsHeaderLeft}>
+              <Button
+                icon={<ArrowLeftOutlined />}
+                onClick={() => setViewing(null)}
+                className={styles.backButton}
+              >
+                Foruma Geri Dön
+              </Button>
+              <h2>{viewing.title} - Konular</h2>
+            </div>
             <Button
               type="primary"
               onClick={() => onAddTopic(viewing.id)}
@@ -371,7 +385,16 @@ const ForumList: React.FC = () => {
                 ]}
                 dataSource={topics}
                 rowKey="id"
-                pagination={false}
+                pagination={{
+                  current: topicsCurrentPage,
+                  pageSize: topicsPageSize,
+                  showSizeChanger: true,
+                  showQuickJumper: true,
+                  showTotal: (total, range) =>
+                    `${range[0]}-${range[1]} / ${total} konu`,
+                  onChange: setTopicsCurrentPage,
+                  onShowSizeChange: setTopicsPageSize,
+                }}
                 className={styles.topicsTableComponent}
               />
             </div>

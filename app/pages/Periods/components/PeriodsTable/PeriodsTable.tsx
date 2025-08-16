@@ -14,6 +14,10 @@ interface PeriodsTableProps {
   onDelete: (period: IPeriod) => void;
   onViewAnimes: (period: IPeriod) => void;
   onAddAnime: (period: IPeriod) => void;
+  currentPage?: number;
+  pageSize?: number;
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
 }
 
 const PeriodsTable: React.FC<PeriodsTableProps> = ({
@@ -23,6 +27,10 @@ const PeriodsTable: React.FC<PeriodsTableProps> = ({
   onDelete,
   onViewAnimes,
   onAddAnime,
+  currentPage = 1,
+  pageSize = 10,
+  onPageChange,
+  onPageSizeChange,
 }) => {
   const columns = [
     {
@@ -123,11 +131,14 @@ const PeriodsTable: React.FC<PeriodsTableProps> = ({
         loading={loading}
         rowKey="id"
         pagination={{
-          pageSize: 10,
+          current: currentPage,
+          pageSize: pageSize,
           showSizeChanger: true,
           showQuickJumper: true,
           showTotal: (total, range) =>
             `${range[0]}-${range[1]} / ${total} mevsim`,
+          onChange: onPageChange,
+          onShowSizeChange: onPageSizeChange,
         }}
         className={styles.periodsTable}
       />

@@ -49,9 +49,16 @@ const CommentModals: React.FC<CommentModalProps> = ({
 }) => {
   useEffect(() => {
     if (editingComment && isEditModalVisible) {
+      // Set the seasonEpisodeId if both season and episode exist
+      let seasonEpisodeId: string | undefined;
+      if (editingComment.season?.id && editingComment.episode?.id) {
+        seasonEpisodeId = `${editingComment.season.id}-${editingComment.episode.id}`;
+      }
+
       form.setFieldsValue({
         content: editingComment.content,
-        animeId: editingComment.anime?.id || editingComment.episode?.id,
+        animeId: editingComment.anime?.id,
+        seasonEpisodeId: seasonEpisodeId,
         status: editingComment.status,
       });
     }
@@ -93,16 +100,17 @@ const CommentModals: React.FC<CommentModalProps> = ({
 
           <Form.Item
             name="seasonEpisodeId"
-            label="Sezon & Bölüm"
+            label="Sezon & Bölüm (Opsiyonel)"
             rules={[
-              { required: true, message: "Lütfen sezon ve bölüm seçin!" },
+              { required: false, message: "Lütfen sezon ve bölüm seçin!" },
             ]}
           >
             <Select
-              placeholder="Sezon ve bölüm seçin..."
+              placeholder="Sezon ve bölüm seçin (boş bırakılırsa anime'ye yorum yapılır)..."
               options={episodeOptions}
               notFoundContent="Sezon/bölüm bulunamadı"
               disabled={!form.getFieldValue("animeId")}
+              allowClear
             />
           </Form.Item>
 
@@ -150,16 +158,17 @@ const CommentModals: React.FC<CommentModalProps> = ({
 
           <Form.Item
             name="seasonEpisodeId"
-            label="Sezon & Bölüm"
+            label="Sezon & Bölüm (Opsiyonel)"
             rules={[
-              { required: true, message: "Lütfen sezon ve bölüm seçin!" },
+              { required: false, message: "Lütfen sezon ve bölüm seçin!" },
             ]}
           >
             <Select
-              placeholder="Sezon ve bölüm seçin..."
+              placeholder="Sezon ve bölüm seçin (boş bırakılırsa anime'ye yorum yapılır)..."
               options={episodeOptions}
               notFoundContent="Sezon/bölüm bulunamadı"
               disabled={!form.getFieldValue("animeId")}
+              allowClear
             />
           </Form.Item>
 
