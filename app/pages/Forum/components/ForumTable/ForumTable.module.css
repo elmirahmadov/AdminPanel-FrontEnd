@@ -5,22 +5,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   width: 100%;
   margin-top: 16px;
-  border: 1px solid #353b4a;
 }
 
-/* Table Header Styling */
 .tableContainer .ant-table-thead > tr > th {
   background: #23263a;
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   font-weight: 600;
   padding: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   font-size: 13px;
 }
 
-/* Table Body Styling */
 .tableContainer .ant-table-tbody > tr > td {
   background: #1a1d2e;
   color: #e8eaed;
@@ -47,16 +42,10 @@
   display: block;
   cursor: pointer;
   transition: color 0.2s ease;
-  padding: 4px 8px;
-  background: rgba(79, 140, 255, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(79, 140, 255, 0.2);
 }
 
 .titleText:hover {
   color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .categoryTag {
@@ -79,10 +68,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
-  padding: 4px 8px;
-  background: rgba(139, 157, 195, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(139, 157, 195, 0.2);
 }
 
 .statusSwitch {
@@ -220,10 +205,6 @@
   align-items: center;
   gap: 6px;
   color: #8b9dc3;
-  padding: 4px 8px;
-  background: rgba(79, 140, 255, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(79, 140, 255, 0.2);
 }
 
 .topicIcon {
@@ -238,10 +219,8 @@
 
 .actionButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Pagination Styling */
 .tableContainer .ant-pagination {
   background: #23263a;
   padding: 16px;

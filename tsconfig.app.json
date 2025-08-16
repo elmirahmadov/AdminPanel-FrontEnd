@@ -9,7 +9,8 @@
     "skipLibCheck": true,
 
     "paths": {
-      "@/*": ["./app/*"]
+      "@/*": ["./app/*"],
+      "@/services/*": ["./services/*"]
     },
 
     "moduleResolution": "bundler",

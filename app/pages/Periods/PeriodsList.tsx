@@ -10,7 +10,10 @@ import {
   Select,
   Table,
   Tag,
+  message,
 } from "antd";
+
+import { lookupAnime } from "../../../services/api/anime.api";
 
 import PeriodsForm from "./components/PeriodsForm";
 import PeriodsHeader from "./components/PeriodsHeader";
@@ -24,9 +27,11 @@ const PeriodsList: React.FC = () => {
     periods,
     loading,
     fetchAllPeriods,
+    getPeriodById,
     addPeriod,
     updatePeriod,
     deletePeriod,
+    addAnimeToPeriod,
   } = usePeriodsStore();
 
   const [animeSearch, setAnimeSearch] = useState("");
@@ -37,6 +42,17 @@ const PeriodsList: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<IPeriod | null>(null);
   const [form] = Form.useForm();
   const [addAnimeForm] = Form.useForm();
+
+  // Anime arama state'leri
+  const [animeOptions, setAnimeOptions] = useState<
+    { value: string; label: string }[]
+  >([]);
+  const [animeSearchTimer, setAnimeSearchTimer] =
+    useState<NodeJS.Timeout | null>(null);
+  const [selectedAnime, setSelectedAnime] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
 
   useEffect(() => {
     // Tüm dönemleri getir
@@ -53,12 +69,8 @@ const PeriodsList: React.FC = () => {
     setEditing(period);
     form.setFieldsValue({
       name: period.name,
-      year: period.year,
-      season: period.season,
-      startDate: period.startDate,
-      endDate: period.endDate,
-      animeCount: period.animeCount,
-      totalEpisodes: period.totalEpisodes,
+      startYear: period.startYear,
+      endYear: period.endYear,
       description: period.description,
     });
     setModalOpen(true);
@@ -80,14 +92,85 @@ const PeriodsList: React.FC = () => {
     await deletePeriod(period.id);
   };
 
-  const onViewAnimes = (period: IPeriod) => {
-    setViewingAnimes(period);
+  const onViewAnimes = async (period: IPeriod) => {
+    try {
+      const periodWithAnimes = await getPeriodById(period.id);
+      setViewingAnimes(periodWithAnimes);
+    } catch (error) {
+      message.error("Dönem detayları yüklenirken hata oluştu!");
+    }
   };
 
   const onAddAnime = (period: IPeriod) => {
     setSelectedPeriod(period);
     addAnimeForm.resetFields();
+    setAnimeOptions([]);
+    setSelectedAnime(null);
     setAddAnimeModalOpen(true);
+  };
+
+  const handleAnimeLookup = async (query: string) => {
+    if (query.length < 2) {
+      setAnimeOptions([]);
+      return;
+    }
+
+    // Clear previous timer
+    if (animeSearchTimer) {
+      clearTimeout(animeSearchTimer);
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        const response = await lookupAnime(query);
+        const results = response.data;
+
+        if (Array.isArray(results) && results.length > 0) {
+          const options = results.map((anime: any) => ({
+            value: anime.id.toString(),
+            label: anime.title,
+          }));
+          setAnimeOptions(options);
+        } else {
+          setAnimeOptions([]);
+        }
+      } catch (error) {
+        console.error("Anime lookup error:", error);
+        setAnimeOptions([]);
+        message.error("Anime arama sırasında hata oluştu!");
+      }
+    }, 300);
+
+    setAnimeSearchTimer(timer);
+  };
+
+  const handleAnimeSelect = (animeId: string) => {
+    const anime = animeOptions.find((option) => option.value === animeId);
+    if (anime) {
+      setSelectedAnime({ id: animeId, title: anime.label });
+    }
+  };
+
+  const handleAddAnimeToPeriod = async () => {
+    if (!selectedAnime || !selectedPeriod) {
+      message.error("Lütfen bir anime seçin!");
+      return;
+    }
+
+    try {
+      const values = await addAnimeForm.validateFields();
+      const episodeCount = values.episodeCount || 0;
+
+      await addAnimeToPeriod(selectedPeriod.id, selectedAnime.id, episodeCount);
+      message.success(
+        `${selectedAnime.title} anime'si ${selectedPeriod.name} dönemine eklendi!`
+      );
+      setAddAnimeModalOpen(false);
+      setSelectedAnime(null);
+      setAnimeOptions([]);
+    } catch (error) {
+      message.error("Anime eklenirken hata oluştu!");
+    }
   };
 
   const onBackToPeriods = () => {
@@ -114,7 +197,7 @@ const PeriodsList: React.FC = () => {
                 <strong>Toplam Anime:</strong> {viewingAnimes.animeCount}
               </span>
               <span className={styles.statItem}>
-                <strong>Toplam Bölüm:</strong> {viewingAnimes.totalEpisodes}
+                <strong>Toplam Bölüm:</strong> {viewingAnimes.episodeCount}
               </span>
             </div>
           </div>
@@ -131,7 +214,7 @@ const PeriodsList: React.FC = () => {
                   dataIndex: "id",
                   key: "id",
                   width: 80,
-                  render: (text: string) => <Tag color="blue">{text}</Tag>,
+                  render: (text: number) => <Tag color="blue">{text}</Tag>,
                 },
                 {
                   title: "Anime Adı",
@@ -144,37 +227,23 @@ const PeriodsList: React.FC = () => {
                 },
                 {
                   title: "Bölüm Sayısı",
-                  dataIndex: "episodeCount",
+                  dataIndex: "seasons",
                   key: "episodeCount",
                   width: 120,
-                  render: (count: number) => <Tag color="green">{count}</Tag>,
+                  render: (seasons: any[]) => {
+                    const totalEpisodes =
+                      seasons?.reduce((total, season) => {
+                        return total + (season.episodes?.length || 0);
+                      }, 0) || 0;
+                    return <Tag color="green">{totalEpisodes}</Tag>;
+                  },
                 },
                 {
-                  title: "Durum",
-                  dataIndex: "status",
-                  key: "status",
+                  title: "Yayın Yılı",
+                  dataIndex: "releaseYear",
+                  key: "releaseYear",
                   width: 120,
-                  render: (status: string) => {
-                    const statusColors = {
-                      ONGOING: "processing",
-                      COMPLETED: "success",
-                      UPCOMING: "warning",
-                    };
-                    const statusLabels = {
-                      ONGOING: "Devam Ediyor",
-                      COMPLETED: "Tamamlandı",
-                      UPCOMING: "Yakında",
-                    };
-                    return (
-                      <Tag
-                        color={
-                          statusColors[status as keyof typeof statusColors]
-                        }
-                      >
-                        {statusLabels[status as keyof typeof statusLabels]}
-                      </Tag>
-                    );
-                  },
+                  render: (year: number) => <Tag color="blue">{year}</Tag>,
                 },
               ]}
             />
@@ -210,57 +279,79 @@ const PeriodsList: React.FC = () => {
         <PeriodsForm form={form} />
       </Modal>
 
-             {/* Anime Ekleme Modal */}
-       <Modal
-         open={addAnimeModalOpen}
-         onCancel={() => setAddAnimeModalOpen(false)}
-         onOk={() => setAddAnimeModalOpen(false)}
-         title={`${selectedPeriod?.name} - Anime Ekle`}
-         okText="Kapat"
-         width={500}
-         footer={[
-           <Button key="close" onClick={() => setAddAnimeModalOpen(false)}>
-             Kapat
-           </Button>,
-         ]}
-       >
-         <div style={{ marginBottom: 16 }}>
-           <Input
-             placeholder="Anime ismi yazın..."
-             value={animeSearch}
-             onChange={(e) => setAnimeSearch(e.target.value)}
-             size="large"
-             style={{ marginBottom: 16 }}
-           />
+      {/* Anime Ekleme Modal */}
+      <Modal
+        open={addAnimeModalOpen}
+        onCancel={() => {
+          setAddAnimeModalOpen(false);
+          setSelectedAnime(null);
+          setAnimeOptions([]);
+        }}
+        title={`${selectedPeriod?.name} - Anime Ekle`}
+        width={500}
+        footer={[
+          <Button
+            key="cancel"
+            onClick={() => {
+              setAddAnimeModalOpen(false);
+              setSelectedAnime(null);
+              setAnimeOptions([]);
+            }}
+          >
+            İptal
+          </Button>,
+          <Button
+            key="add"
+            type="primary"
+            onClick={handleAddAnimeToPeriod}
+            disabled={!selectedAnime}
+          >
+            Anime Ekle
+          </Button>,
+        ]}
+      >
+        <div style={{ marginBottom: 16 }}>
+          <Form.Item label="Anime Ara">
+            <Select
+              showSearch
+              placeholder="Anime ismi yazın..."
+              filterOption={false}
+              onSearch={handleAnimeLookup}
+              onChange={handleAnimeSelect}
+              options={animeOptions}
+              notFoundContent="Anime bulunamadı"
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
 
-           {animeSearch && (
-             <div
-               style={{
-                 background: "#f5f5f5",
-                 padding: 16,
-                 borderRadius: 8,
-                 marginBottom: 16,
-               }}
-             >
-               <h4>Bulunan Anime:</h4>
-               <p>
-                 <strong>İsim:</strong> {animeSearch}
-               </p>
-               <Button
-                 type="primary"
-                 onClick={() => {
-                   // TODO: Bu anime'yi mevsime ekle
-                   console.log("Anime ekleniyor:", animeSearch);
-                   setAnimeSearch("");
-                 }}
-                 style={{ marginTop: 8 }}
-               >
-                 Bu Anime'yi Ekle
-               </Button>
-             </div>
-           )}
-         </div>
-       </Modal>
+          {selectedAnime && (
+            <div
+              style={{
+                background: "#f5f5f5",
+                padding: 16,
+                borderRadius: 8,
+                marginBottom: 16,
+              }}
+            >
+              <h4>Seçilen Anime:</h4>
+              <p>
+                <strong>İsim:</strong> {selectedAnime.title}
+              </p>
+              <p>
+                <strong>ID:</strong> {selectedAnime.id}
+              </p>
+            </div>
+          )}
+
+          <Form.Item label="Bölüm Sayısı" name="episodeCount">
+            <InputNumber
+              placeholder="Bölüm sayısını girin..."
+              min={0}
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+        </div>
+      </Modal>
     </div>
   );
 };

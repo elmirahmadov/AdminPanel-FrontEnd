@@ -159,26 +159,15 @@ const ForumList: React.FC = () => {
   return (
     <div className={styles.container}>
       {/* Error Display */}
-      {error && (
-        <div
-          style={{
-            marginBottom: 16,
-            padding: 12,
-            background: "#ff4d4f",
-            color: "white",
-            borderRadius: 6,
-            border: "1px solid #ff7875",
-          }}
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className={styles.errorDisplay}>{error}</div>}
 
-      <ForumHeader
-        search={search}
-        onSearchChange={setSearch}
-        onAddClick={openAdd}
-      />
+      {!viewing && (
+        <ForumHeader
+          search={search}
+          onSearchChange={setSearch}
+          onAddClick={openAdd}
+        />
+      )}
 
       {!viewing ? (
         <ForumTable
@@ -229,17 +218,17 @@ const ForumList: React.FC = () => {
                       <div className={styles.topicTitleCell}>
                         {title}
                         {record.isPinned && (
-                          <Tag color="green" style={{ marginLeft: 8 }}>
+                          <Tag color="green" className={styles.pinnedTag}>
                             📌
                           </Tag>
                         )}
                         {record.isSticky && (
-                          <Tag color="orange" style={{ marginLeft: 8 }}>
+                          <Tag color="orange" className={styles.stickyTag}>
                             ⭐
                           </Tag>
                         )}
                         {record.isLocked && (
-                          <Tag color="red" style={{ marginLeft: 8 }}>
+                          <Tag color="red" className={styles.lockedTag}>
                             🔒
                           </Tag>
                         )}

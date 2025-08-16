@@ -1,5 +1,6 @@
 .userCell {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
 }
@@ -122,6 +123,7 @@
 .dateCell {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 

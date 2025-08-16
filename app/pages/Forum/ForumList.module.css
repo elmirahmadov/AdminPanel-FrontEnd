@@ -3,13 +3,25 @@
   padding: 24px;
 }
 
-/* Konular Görünümü */
-.topicsView {
-  background: #1a1d2e;
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid #353b4a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.errorDisplay {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #ff4d4f;
+  color: white;
+  border-radius: 6px;
+  border: 1px solid #ff7875;
+}
+
+.pinnedTag {
+  margin-left: 8px;
+}
+
+.stickyTag {
+  margin-left: 8px;
+}
+
+.lockedTag {
+  margin-left: 8px;
 }
 
 .topicsHeader {
@@ -48,10 +60,10 @@
 }
 
 .topicsTable {
-  background: #23263a;
-  border-radius: 8px;
+  background: #1a1d2e;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #353b4a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .topicsTableComponent {
@@ -59,19 +71,23 @@
 }
 
 .topicsTableComponent .ant-table-thead > tr > th {
-  background: #1a1d2e;
+  background: #23263a;
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   font-weight: 600;
   padding: 16px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .topicsTableComponent .ant-table-tbody > tr > td {
-  background: #23263a;
+  background: #1a1d2e;
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   padding: 16px;
   transition: background-color 0.2s ease;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .topicsTableComponent .ant-table-tbody > tr:hover > td {
@@ -79,7 +95,7 @@
 }
 
 .topicTitleCell {
-  font-weight: 500;
+  font-weight: 600;
   color: #4f8cff;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -93,17 +109,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 8px;
-  background: rgba(79, 140, 255, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(79, 140, 255, 0.2);
+  color: #8b9dc3;
 }
 
 .authorAvatar {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px solid #4f8cff;
+  border: 1px solid #4f8cff;
 }
 
 .replyCountCell,
@@ -113,28 +126,14 @@
   align-items: center;
   gap: 6px;
   color: #8b9dc3;
-  padding: 4px 8px;
-  background: rgba(139, 157, 195, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(139, 157, 195, 0.2);
 }
 
 .replyCountCell {
   color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .viewCountCell {
   color: #f59e0b;
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.2);
-}
-
-.dateCell {
-  color: #8b9dc3;
-  background: rgba(139, 157, 195, 0.1);
-  border-color: rgba(139, 157, 195, 0.2);
 }
 
 .statusCell {
@@ -165,9 +164,6 @@
   padding: 40px;
   color: #8b9dc3;
   font-size: 16px;
-  background: rgba(35, 38, 58, 0.5);
-  border-radius: 8px;
-  border: 1px dashed #353b4a;
 }
 
 .topicsActions {
@@ -185,59 +181,58 @@
 
 .actionsCell {
   display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 .actionsCell .ant-btn {
-  font-size: 11px;
-  padding: 4px 8px;
-  height: 32px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
   transition: all 0.2s ease;
-  border: 1px solid transparent;
-  color: #8b9dc3;
-  background: rgba(139, 157, 195, 0.1);
-  border-color: rgba(139, 157, 195, 0.2);
 }
 
 .actionsCell .ant-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  background: rgba(139, 157, 195, 0.2);
-  border-color: rgba(139, 157, 195, 0.4);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* Aktif durumlar için özel renkler */
 .actionsCell .ant-btn.pinnedButton {
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.4);
+  background: #4a3f2a !important;
+  border-color: #4a3f2a !important;
 }
 
 .actionsCell .ant-btn.pinnedButton:hover {
-  background: rgba(16, 185, 129, 0.25);
-  border-color: rgba(16, 185, 129, 0.6);
+  background: #5a4f3a !important;
+  border-color: #5a4f3a !important;
 }
 
 .actionsCell .ant-btn.lockedButton {
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.4);
+  background: #473b4a !important;
+  border-color: #473b4a !important;
 }
 
 .actionsCell .ant-btn.lockedButton:hover {
-  background: rgba(239, 68, 68, 0.25);
-  border-color: rgba(239, 68, 68, 0.6);
+  background: #7c3e47 !important;
+  border-color: #7c3e47 !important;
 }
 
 .actionsCell .ant-btn.stickyButton {
-  color: #f59e0b;
-  background: rgba(245, 158, 11, 0.15);
-  border-color: rgba(245, 158, 11, 0.4);
+  background: #3a3f54 !important;
+  border-color: #3a3f54 !important;
 }
 
 .actionsCell .ant-btn.stickyButton:hover {
-  background: rgba(245, 158, 11, 0.25);
-  border-color: rgba(245, 158, 11, 0.6);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
 }

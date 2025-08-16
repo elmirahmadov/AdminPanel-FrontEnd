@@ -63,8 +63,8 @@ const PeriodsTable: React.FC<PeriodsTableProps> = ({
     },
     {
       title: "Bölüm Sayısı",
-      dataIndex: "totalEpisodes",
-      key: "totalEpisodes",
+      dataIndex: "episodeCount",
+      key: "episodeCount",
       width: 120,
       render: (count: number) => (
         <span className={styles.totalEpisodes}>{count}</span>
