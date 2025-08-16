@@ -11,17 +11,17 @@ import { Button, Image, Table, Tag, Tooltip } from "antd";
 
 import styles from "./AnimeList.module.css";
 import AnimeAddEditModal from "./components/AnimeAddEditModal/AnimeAddEditModal";
-import AnimeDeleteModal from "./components/AnimeDeleteModal/AnimeDeleteModal";
 import AnimeFilterBar from "./components/AnimeFilterBar/AnimeFilterBar";
 import SeasonModal from "./components/SeasonModal/SeasonModal";
 
-// import { Loading } from "@/common/components/Loading";
+import DeleteModal from "@/common/components/DeleteModals/DeleteModal";
+import { Loading } from "@/common/components/Loading";
 import { useAnimeStore } from "@/common/store/anime";
 import type { IAnime } from "@/common/store/anime/anime.types";
 import { useSeasonStore } from "@/common/store/season";
 import type { ISeason } from "@/common/store/season/season.types";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
 
 const initialForm = {
   title: "",
@@ -138,6 +138,11 @@ const AnimeList: React.FC = () => {
   useEffect(() => {
     fetchAnimes();
   }, [fetchAnimes]);
+
+  // Loading durumunda Loading component'ini göster
+  if (loading) {
+    return <Loading />;
+  }
 
   // Tam sayfayı yeniden render eden loading yerine tablo içi loading kullanacağız
 
@@ -468,7 +473,7 @@ const AnimeList: React.FC = () => {
           rowClassName={styles.tableRow}
           tableLayout="fixed"
           size="small"
-          loading={loading}
+          loading={false}
         />
       </div>
 
@@ -483,12 +488,10 @@ const AnimeList: React.FC = () => {
           formError={formError}
         />
       )}
-      <AnimeDeleteModal
+      <DeleteModal
         open={modalType === "delete"}
         onCancel={closeModal}
         onConfirm={handleDelete}
-        animeTitle={selectedAnime?.title}
-        loading={loading}
       />
       <SeasonModal
         open={seasonModalOpen}

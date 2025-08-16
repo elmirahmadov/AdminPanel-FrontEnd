@@ -669,6 +669,8 @@ input {
 
 .ant-table-container {
   height: 100%;
+  height: 600px;
+  background: #1a1d2e;
 }
 
 .ant-table-thead > tr > th {
@@ -798,6 +800,8 @@ input {
 .ant-table-placeholder .ant-table-cell {
   background: #1a1d2e !important;
   color: #bfc9da !important;
+  height: 600px;
+  border-bottom: none !important;
 }
 
 /* Ant Design Tabs dark theme */
@@ -860,6 +864,7 @@ input {
   color: #ffffff !important;
   background: #2a2d3e !important;
   border-bottom: 1px solid #35395a !important;
+  text-align: center !important;
 }
 
 /* Table cell content alignment */
@@ -867,6 +872,7 @@ input {
   vertical-align: middle !important;
   padding: 12px 8px !important;
   border-bottom: 1px solid #35395a !important;
+  text-align: center !important;
 }
 
 /* Ensure table content doesn't wrap unnecessarily */

@@ -17,7 +17,7 @@
   border-bottom: 1px solid #353b4a;
   font-weight: 600;
   padding: 16px;
-  text-align: center;
+  text-align: center !important;
 }
 
 .periodsTable .ant-table-tbody > tr > td {
@@ -25,12 +25,26 @@
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   padding: 16px;
-  text-align: center;
+  text-align: center !important;
   transition: background-color 0.2s ease;
 }
 
 .periodsTable .ant-table-tbody > tr:hover > td {
   background: #2a2d3e;
+}
+
+/* Ensure all table content is centered */
+.periodsTable .ant-table-thead > tr > th > *,
+.periodsTable .ant-table-tbody > tr > td > * {
+  text-align: center !important;
+}
+
+.periodsTable .ant-table-thead > tr > th > div,
+.periodsTable .ant-table-tbody > tr > td > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .idTag {

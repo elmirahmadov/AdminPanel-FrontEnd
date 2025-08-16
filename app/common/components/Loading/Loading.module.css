@@ -15,9 +15,92 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(
+    135deg,
+    rgba(24, 28, 39, 0.95) 0%,
+    rgba(35, 38, 58, 0.9) 50%,
+    rgba(26, 29, 46, 0.95) 100%
+  );
   z-index: 99999999;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.full::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(16, 185, 129, 0.1) 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  z-index: -1;
 }
 
 :global(.ant-spin-dot-item) {
+  background-color: #8b5cf6 !important;
+}
+
+:global(.ant-spin) {
+  color: #8b5cf6 !important;
+}
+
+:global(.ant-spin-dot) {
+  font-size: 32px !important;
+}
+
+:global(.ant-spin-dot-item) {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #8b5cf6, #10b981) !important;
+  animation: spinPulse 1.2s ease-in-out infinite !important;
+}
+
+@keyframes spinPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Anime temalı loading animasyonu */
+.full::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(16, 185, 129, 0.05) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: loadingGlow 2s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes loadingGlow {
+  0% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }

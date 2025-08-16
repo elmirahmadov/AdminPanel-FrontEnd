@@ -3,6 +3,145 @@
   padding: 24px;
 }
 
+.episodesHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #353b4a;
+}
+
+.episodesHeader h2 {
+  color: #e8eaed;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.episodesStats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #23263a;
+  border-radius: 8px;
+  border: 1px solid #353b4a;
+}
+
+.episodesTable {
+  background: #23263a;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #353b4a;
+}
+
+.episodesTableComponent {
+  background: transparent;
+}
+
+.episodesTableComponent .ant-table-thead > tr > th {
+  background: #1a1d2e;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  font-weight: 600;
+  padding: 16px;
+  text-align: center !important;
+}
+
+.episodesTableComponent .ant-table-tbody > tr > td {
+  background: #23263a;
+  color: #e8eaed;
+  border-bottom: 1px solid #353b4a;
+  padding: 16px;
+  transition: background-color 0.2s ease;
+  text-align: center !important;
+}
+
+.episodesTableComponent .ant-table-tbody > tr:hover > td {
+  background: #2a2d3e;
+}
+
+/* Ensure all table content is centered */
+.episodesTableComponent .ant-table-thead > tr > th > *,
+.episodesTableComponent .ant-table-tbody > tr > td > * {
+  text-align: center !important;
+}
+
+.episodesTableComponent .ant-table-thead > tr > th > div,
+.episodesTableComponent .ant-table-tbody > tr > td > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.animeTitleCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.episodeCountCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.iconBtn:hover {
+  transform: translateY(-1px);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.deleteBtn {
+  background: #473b4a !important;
+  border-color: #473b4a !important;
+}
+
+.deleteBtn:hover {
+  background: #7c3e47 !important;
+  border-color: #7c3e47 !important;
+}
+
+.noEpisodes {
+  text-align: center;
+  padding: 48px;
+  color: #a0a0a0;
+  font-size: 16px;
+}
+
 /* Anime List View Styles */
 .animeListView {
   background: #1a1d2e;

@@ -76,7 +76,7 @@
   border-bottom: 1px solid #353b4a;
   font-weight: 600;
   padding: 16px;
-  text-align: center;
+  text-align: center !important;
   vertical-align: middle;
 }
 
@@ -86,7 +86,7 @@
   border-bottom: 1px solid #353b4a;
   padding: 16px;
   transition: background-color 0.2s ease;
-  text-align: center;
+  text-align: center !important;
   vertical-align: middle;
 }
 

@@ -6,7 +6,7 @@ import {
   EyeOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Popconfirm, Table, Tag, Tooltip } from "antd";
+import { Avatar, Button, Table, Tag, Tooltip } from "antd";
 import type { TablePaginationConfig } from "antd/es/table";
 
 import styles from "./CommentTable.module.css";
@@ -18,6 +18,8 @@ interface CommentTableProps {
   loading: boolean;
   onEdit: (comment: IComment) => void;
   onDelete: (comment: IComment) => void;
+  onApprove: (comment: IComment) => void;
+  onReject: (comment: IComment) => void;
   onModeration: (comment: IComment) => void;
   pagination?: TablePaginationConfig;
 }
@@ -27,6 +29,8 @@ const CommentTable: React.FC<CommentTableProps> = ({
   loading,
   onEdit,
   onDelete,
+  onApprove,
+  onReject,
   onModeration,
   pagination,
 }) => {
@@ -129,20 +133,13 @@ const CommentTable: React.FC<CommentTableProps> = ({
               onClick={() => onModeration(record)}
             />
           </Tooltip>
-          <Popconfirm
-            title="Bu yorumu silmek istediğinizden emin misiniz?"
-            onConfirm={() => onDelete(record)}
-            okText="Evet"
-            cancelText="Hayır"
-          >
-            <Tooltip title="Sil">
-              <Button
-                icon={<DeleteOutlined />}
-                className={`${styles.iconBtn} ${styles.deleteBtn}`}
-                onClick={() => onDelete(record)}
-              />
-            </Tooltip>
-          </Popconfirm>
+          <Tooltip title="Sil">
+            <Button
+              icon={<DeleteOutlined />}
+              className={`${styles.iconBtn} ${styles.deleteBtn}`}
+              onClick={() => onDelete(record)}
+            />
+          </Tooltip>
         </div>
       ),
     },

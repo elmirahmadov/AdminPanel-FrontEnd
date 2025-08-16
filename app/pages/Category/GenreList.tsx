@@ -9,6 +9,8 @@ import styles from "./GenreList.module.css";
 
 import { useGenreStore } from "@/common/store/genre";
 import type { IGenre } from "@/common/store/genre/genre.types";
+import DeleteModal from "@/common/components/DeleteModals/DeleteModal";
+import { Loading } from "@/common/components/Loading";
 
 const GenreList: React.FC = () => {
   const { genres, loading } = useGenreStore();
@@ -18,6 +20,8 @@ const GenreList: React.FC = () => {
 
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletingGenre, setDeletingGenre] = useState<IGenre | null>(null);
   const [editing, setEditing] = useState<IGenre | null>(null);
   const [form] = Form.useForm();
 
@@ -35,6 +39,11 @@ const GenreList: React.FC = () => {
         g.description?.toLowerCase().includes(q)
     );
   }, [genres, search]);
+
+  // Loading durumunda Loading component'ini göster
+  if (loading) {
+    return <Loading />;
+  }
 
   const openAdd = () => {
     setEditing(null);
@@ -64,8 +73,22 @@ const GenreList: React.FC = () => {
     form.resetFields();
   };
 
-  const onDelete = async (genre: IGenre) => {
-    await removeGenre(genre.id);
+  const onDelete = (genre: IGenre) => {
+    setDeletingGenre(genre);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (deletingGenre) {
+      await removeGenre(deletingGenre.id);
+      setDeleteModalOpen(false);
+      setDeletingGenre(null);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalOpen(false);
+    setDeletingGenre(null);
   };
 
   return (
@@ -78,7 +101,7 @@ const GenreList: React.FC = () => {
 
       <GenreTable
         genres={filtered}
-        loading={loading}
+        loading={false}
         onEdit={openEdit}
         onDelete={onDelete}
       />
@@ -92,6 +115,12 @@ const GenreList: React.FC = () => {
       >
         <GenreForm form={form} />
       </Modal>
+
+      <DeleteModal
+        open={deleteModalOpen}
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 };
