@@ -102,25 +102,22 @@ const ForumTable: React.FC<ForumTableProps> = ({
       key: "actions",
       width: 150,
       render: (_: unknown, record: IForum) => (
-        <Space size="small">
+        <div className={styles.actionRow}>
           <Tooltip title="Düzenle">
             <Button
               icon={<EditOutlined />}
-              size="small"
-              className={styles.actionButton}
+              className={styles.iconBtn}
               onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title="Sil">
             <Button
-              danger
               icon={<DeleteOutlined />}
-              size="small"
-              className={styles.actionButton}
+              className={`${styles.iconBtn} ${styles.deleteBtn}`}
               onClick={() => onDelete(record)}
             />
           </Tooltip>
-        </Space>
+        </div>
       ),
     },
   ];

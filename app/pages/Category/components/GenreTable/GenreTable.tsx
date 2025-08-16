@@ -22,13 +22,18 @@ const GenreTable: React.FC<GenreTableProps> = ({
       title: "Ad",
       dataIndex: "name",
       key: "name",
-      render: (name: string, record: IGenre) => (
+      render: (name: string) => (
         <div className={styles.nameCell}>
           <div className={styles.nameText}>{name}</div>
-          <Tag color="purple" className={styles.nameTag}>
-            {record.name}
-          </Tag>
         </div>
+      ),
+    },
+    {
+      title: "Slug",
+      dataIndex: "slug",
+      key: "slug",
+      render: (slug?: string) => (
+        <span className={styles.slugText}>{slug || "-"}</span>
       ),
     },
     {
@@ -42,27 +47,24 @@ const GenreTable: React.FC<GenreTableProps> = ({
     {
       title: "İşlemler",
       key: "actions",
-      width: 160,
+      width: 150,
       render: (_: unknown, record: IGenre) => (
-        <Space size="small">
+        <div className={styles.actionRow}>
           <Tooltip title="Düzenle">
             <Button
               icon={<EditOutlined />}
-              size="small"
-              className={styles.actionButton}
+              className={styles.iconBtn}
               onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title="Sil">
             <Button
-              danger
               icon={<DeleteOutlined />}
-              size="small"
-              className={styles.actionButton}
+              className={`${styles.iconBtn} ${styles.deleteBtn}`}
               onClick={() => onDelete(record)}
             />
           </Tooltip>
-        </Space>
+        </div>
       ),
     },
   ];

@@ -112,23 +112,23 @@ const CommentTable: React.FC<CommentTableProps> = ({
     {
       title: "İşlemler",
       key: "actions",
+      width: 150,
       render: (_: unknown, record: IComment) => (
-        <div className={styles.actionsCell}>
+        <div className={styles.actionRow}>
           <Tooltip title="Düzenle">
             <Button
-              type="text"
               icon={<EditOutlined />}
+              className={styles.iconBtn}
               onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title="Moderasyon">
             <Button
-              type="text"
               icon={<EyeOutlined />}
+              className={styles.iconBtn}
               onClick={() => onModeration(record)}
             />
           </Tooltip>
-
           <Popconfirm
             title="Bu yorumu silmek istediğinizden emin misiniz?"
             onConfirm={() => onDelete(record)}
@@ -137,10 +137,9 @@ const CommentTable: React.FC<CommentTableProps> = ({
           >
             <Tooltip title="Sil">
               <Button
-                type="text"
                 icon={<DeleteOutlined />}
+                className={`${styles.iconBtn} ${styles.deleteBtn}`}
                 onClick={() => onDelete(record)}
-                className={styles.deleteButton}
               />
             </Tooltip>
           </Popconfirm>

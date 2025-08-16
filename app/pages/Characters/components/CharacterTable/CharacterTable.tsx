@@ -111,30 +111,29 @@ const CharacterTable: React.FC<CharacterTableProps> = ({
       key: "actions",
       width: 150,
       render: (_: unknown, record: ICharacter) => (
-        <Space size="small">
+        <div className={styles.actionRow}>
           <Tooltip title="Görüntüle">
             <Button
               icon={<EyeOutlined />}
-              size="small"
+              className={styles.iconBtn}
               onClick={() => onView(record)}
             />
           </Tooltip>
           <Tooltip title="Düzenle">
             <Button
               icon={<EditOutlined />}
-              size="small"
+              className={styles.iconBtn}
               onClick={() => onEdit(record)}
             />
           </Tooltip>
           <Tooltip title="Sil">
             <Button
-              danger
               icon={<DeleteOutlined />}
-              size="small"
+              className={`${styles.iconBtn} ${styles.deleteBtn}`}
               onClick={() => onDelete(record)}
             />
           </Tooltip>
-        </Space>
+        </div>
       ),
     },
   ];

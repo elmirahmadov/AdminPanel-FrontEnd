@@ -212,6 +212,7 @@
   font-size: 14px;
 }
 
+/* Action Buttons - Anime listesindeki buton stilleri */
 .actionButton {
   border-radius: 6px;
   transition: all 0.2s ease;
@@ -219,6 +220,49 @@
 
 .actionButton:hover {
   transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Uniform icon button row */
+.actionRow {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.iconBtn:hover {
+  transform: translateY(-1px);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.deleteBtn {
+  background: #473b4a !important;
+  border-color: #473b4a !important;
+}
+
+.deleteBtn:hover {
+  background: #7c3e47 !important;
+  border-color: #7c3e47 !important;
 }
 
 .tableContainer .ant-pagination {

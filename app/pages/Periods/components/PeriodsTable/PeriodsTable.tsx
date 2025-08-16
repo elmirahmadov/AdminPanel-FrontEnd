@@ -88,33 +88,29 @@ const PeriodsTable: React.FC<PeriodsTableProps> = ({
       key: "actions",
       width: 150,
       render: (_: unknown, record: IPeriod) => (
-        <Space size="small">
+        <div className={styles.actionRow}>
           <Tooltip title="Anime Ekle">
             <Button
-              type="text"
               icon={<PlusOutlined />}
+              className={styles.iconBtn}
               onClick={() => onAddAnime(record)}
-              className={styles.addAnimeButton}
             />
           </Tooltip>
           <Tooltip title="Düzenle">
             <Button
-              type="text"
               icon={<EditOutlined />}
+              className={styles.iconBtn}
               onClick={() => onEdit(record)}
-              className={styles.editButton}
             />
           </Tooltip>
           <Tooltip title="Sil">
             <Button
-              type="text"
-              danger
               icon={<DeleteOutlined />}
+              className={`${styles.iconBtn} ${styles.deleteBtn}`}
               onClick={() => onDelete(record)}
-              className={styles.deleteButton}
             />
           </Tooltip>
-        </Space>
+        </div>
       ),
     },
   ];

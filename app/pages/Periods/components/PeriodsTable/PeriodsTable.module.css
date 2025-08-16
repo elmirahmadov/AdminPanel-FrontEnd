@@ -85,34 +85,57 @@
   white-space: nowrap;
 }
 
-.editButton {
-  color: #3b82f6;
+/* Action Buttons - Anime listesindeki buton stilleri */
+.actionButton {
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 
-.editButton:hover {
-  background: rgba(59, 130, 246, 0.1);
-  transform: scale(1.1);
+.actionButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.deleteButton {
-  color: #ef4444;
-  transition: all 0.2s ease;
+/* Uniform icon button row */
+.actionRow {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
-.deleteButton:hover {
-  background: rgba(239, 68, 68, 0.1);
-  transform: scale(1.1);
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px !important;
+  background: #3a3f54 !important;
+  border: 1px solid #3a3f54 !important;
+  color: #fff !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
-.addAnimeButton {
-  color: #10b981;
-  transition: all 0.2s ease;
+.iconBtn:hover {
+  transform: translateY(-1px);
+  background: #4a5474 !important;
+  border-color: #4a5474 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.addAnimeButton:hover {
-  background: rgba(16, 185, 129, 0.1);
-  transform: scale(1.1);
+.deleteBtn {
+  background: #473b4a !important;
+  border-color: #473b4a !important;
+}
+
+.deleteBtn:hover {
+  background: #7c3e47 !important;
+  border-color: #7c3e47 !important;
 }
 .periodsTable .ant-pagination-item {
   background: #23263a;

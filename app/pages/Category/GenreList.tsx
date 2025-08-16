@@ -31,6 +31,7 @@ const GenreList: React.FC = () => {
     return genres.filter(
       (g) =>
         g.name.toLowerCase().includes(q) ||
+        g.slug?.toLowerCase().includes(q) ||
         g.description?.toLowerCase().includes(q)
     );
   }, [genres, search]);
@@ -43,7 +44,11 @@ const GenreList: React.FC = () => {
 
   const openEdit = (genre: IGenre) => {
     setEditing(genre);
-    form.setFieldsValue({ name: genre.name, description: genre.description });
+    form.setFieldsValue({
+      name: genre.name,
+      slug: genre.slug,
+      description: genre.description,
+    });
     setModalOpen(true);
   };
 

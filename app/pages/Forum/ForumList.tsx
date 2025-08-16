@@ -293,17 +293,9 @@ const ForumList: React.FC = () => {
                     render: (_: unknown, record: ITopic) => (
                       <div className={styles.actionsCell}>
                         <Button
-                          size="small"
-                          type="text"
-                          icon={
-                            record.isPinned ? (
-                              <PushpinOutlined />
-                            ) : (
-                              <PushpinOutlined />
-                            )
-                          }
+                          icon={<PushpinOutlined />}
                           onClick={() => onPinTopic(record.id)}
-                          className={record.isPinned ? styles.pinnedButton : ""}
+                          className={`${styles.iconBtn} ${record.isPinned ? styles.pinnedButton : ""}`}
                           title={
                             record.isPinned
                               ? "Sabitlemeyi Kaldır (Tekrar tıkla)"
@@ -311,17 +303,9 @@ const ForumList: React.FC = () => {
                           }
                         />
                         <Button
-                          size="small"
-                          type="text"
-                          icon={
-                            record.isLocked ? (
-                              <LockOutlined />
-                            ) : (
-                              <LockOutlined />
-                            )
-                          }
+                          icon={<LockOutlined />}
                           onClick={() => onLockTopic(record.id)}
-                          className={record.isLocked ? styles.lockedButton : ""}
+                          className={`${styles.iconBtn} ${record.isLocked ? styles.lockedButton : ""}`}
                           title={
                             record.isLocked
                               ? "Kilidi Aç (Tekrar tıkla)"
@@ -329,24 +313,15 @@ const ForumList: React.FC = () => {
                           }
                         />
                         <Button
-                          size="small"
-                          type="text"
                           icon={<EditOutlined />}
                           onClick={() => onEditTopic(record)}
+                          className={styles.iconBtn}
                           title="Düzenle"
                         />
                         <Button
-                          size="small"
-                          type="text"
-                          icon={
-                            record.isSticky ? (
-                              <StarOutlined />
-                            ) : (
-                              <StarOutlined />
-                            )
-                          }
+                          icon={<StarOutlined />}
                           onClick={() => onStickyTopic(record.id)}
-                          className={record.isSticky ? styles.stickyButton : ""}
+                          className={`${styles.iconBtn} ${record.isSticky ? styles.stickyButton : ""}`}
                           title={
                             record.isSticky
                               ? "Yapışkan Kaldır (Tekrar tıkla)"
@@ -354,11 +329,9 @@ const ForumList: React.FC = () => {
                           }
                         />
                         <Button
-                          size="small"
-                          type="text"
                           icon={<DeleteOutlined />}
                           onClick={() => onDeleteTopic(record.id)}
-                          danger
+                          className={`${styles.iconBtn} ${styles.deleteBtn}`}
                           title="Sil"
                         />
                       </div>
