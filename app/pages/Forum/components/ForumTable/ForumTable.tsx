@@ -18,6 +18,10 @@ interface ForumTableProps {
   onDelete: (forum: IForum) => void;
   onViewTopics: (forum: IForum) => void;
   onToggleStatus: (forum: IForum, isActive: boolean) => void;
+  currentPage?: number;
+  pageSize?: number;
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
 }
 
 const ForumTable: React.FC<ForumTableProps> = ({
@@ -27,6 +31,10 @@ const ForumTable: React.FC<ForumTableProps> = ({
   onDelete,
   onViewTopics,
   onToggleStatus,
+  currentPage = 1,
+  pageSize = 10,
+  onPageChange,
+  onPageSizeChange,
 }) => {
   const columns = [
     {
@@ -129,7 +137,16 @@ const ForumTable: React.FC<ForumTableProps> = ({
         dataSource={forums}
         rowKey="id"
         loading={loading}
-        pagination={{ pageSize: 10, showSizeChanger: false }}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal: (total, range) =>
+            `${range[0]}-${range[1]} / ${total} forum`,
+          onChange: onPageChange,
+          onShowSizeChange: onPageSizeChange,
+        }}
       />
     </div>
   );

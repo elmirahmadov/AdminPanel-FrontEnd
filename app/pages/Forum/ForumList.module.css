@@ -27,10 +27,14 @@
 .topicsHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.topicsHeaderLeft {
+  display: flex;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #353b4a;
 }
 
 .backButton {

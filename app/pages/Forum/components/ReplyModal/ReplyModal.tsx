@@ -38,17 +38,13 @@ const ReplyModal: React.FC<ReplyModalProps> = ({
 
       if (mode === "create") {
         await addReply(topicId, values);
-        message.success("Yanıt başarıyla eklendi");
       } else {
         await editReply(editingReply.id, values);
-        message.success("Yanıt başarıyla güncellendi");
       }
 
       form.resetFields();
       onCancel();
-    } catch (error) {
-      message.error("Bir hata oluştu");
-    }
+    } catch (error) {}
   };
 
   return (

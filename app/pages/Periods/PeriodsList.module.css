@@ -6,10 +6,14 @@
 .episodesHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.episodesHeaderLeft {
+  display: flex;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #353b4a;
 }
 
 .episodesHeader h2 {
@@ -30,10 +34,8 @@
 }
 
 .episodesTable {
-  background: #23263a;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #353b4a;
+  background: #1a1d2e;
+  border-radius: 12px;
 }
 
 .episodesTableComponent {
@@ -41,7 +43,7 @@
 }
 
 .episodesTableComponent .ant-table-thead > tr > th {
-  background: #1a1d2e;
+  background: #23263a;
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   font-weight: 600;
@@ -50,7 +52,7 @@
 }
 
 .episodesTableComponent .ant-table-tbody > tr > td {
-  background: #23263a;
+  background: #1a1d2e;
   color: #e8eaed;
   border-bottom: 1px solid #353b4a;
   padding: 16px;

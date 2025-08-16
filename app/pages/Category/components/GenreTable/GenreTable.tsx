@@ -77,7 +77,7 @@ const GenreTable: React.FC<GenreTableProps> = ({
         dataSource={genres}
         rowKey="id"
         loading={loading}
-        pagination={{ pageSize: 10, showSizeChanger: false }}
+        pagination={{ pageSize: 8, showSizeChanger: false }}
       />
     </div>
   );

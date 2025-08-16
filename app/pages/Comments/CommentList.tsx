@@ -26,9 +26,10 @@ import { lookupAnime } from "../../../services/api/anime.api";
 import type {
   IComment,
   ICommentCreatePayload,
+  ICommentUpdatePayload,
 } from "@/common/store/comment/comment.types";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 8;
 
 // Admin Dashboard Statistics Interface
 interface DashboardStats {
@@ -270,31 +271,25 @@ const CommentList: React.FC = () => {
       switch (action) {
         case "APPROVE":
           await approveComment(selectedCommentForModeration.id);
-          message.success("Yorum onaylandı!");
           break;
         case "REJECT":
           await rejectComment(selectedCommentForModeration.id);
-          message.success("Yorum reddedildi!");
           break;
         case "HIDE":
           await editComment(selectedCommentForModeration.id, {
             status: "HIDDEN",
           });
-          message.success("Yorum gizlendi!");
           break;
       }
       setIsModerationModalVisible(false);
       setSelectedCommentForModeration(null);
       fetchComments();
-    } catch (error) {
-      message.error("İşlem sırasında hata oluştu!");
-    }
+    } catch (error) {}
   };
 
   const exportToCSV = () => {
     const safeComments = Array.isArray(comments) ? comments : [];
     if (safeComments.length === 0) {
-      message.warning("Dışa aktılacak yorum bulunamadı!");
       return;
     }
 
@@ -343,23 +338,33 @@ const CommentList: React.FC = () => {
     try {
       const values = await form.validateFields();
 
-      // Parse seasonId and episodeId from combined field
+      // Parse seasonId and episodeId from combined field (if provided)
       const seasonEpisodeId = values.seasonEpisodeId;
-      const [seasonId, episodeId] = seasonEpisodeId.split("-").map(Number);
+      let seasonId: number | undefined;
+      let episodeId: number | undefined;
+
+      if (seasonEpisodeId) {
+        [seasonId, episodeId] = seasonEpisodeId.split("-").map(Number);
+      }
 
       const payload: ICommentCreatePayload = {
         animeId: Number(values.animeId),
-        seasonId: seasonId,
-        episodeId: episodeId,
         content: values.content,
         isSpoiler: false,
       };
+
+      // Only add seasonId and episodeId if they are provided
+      if (seasonId) {
+        payload.seasonId = seasonId;
+      }
+      if (episodeId) {
+        payload.episodeId = episodeId;
+      }
 
       console.log("Sending payload:", payload);
       console.log("API endpoint:", "/api/comment");
 
       await addComment(payload);
-      message.success("Yorum başarıyla eklendi!");
       setIsAddModalVisible(false);
       form.resetFields();
       fetchComments();
@@ -369,12 +374,6 @@ const CommentList: React.FC = () => {
       console.error("Error response:", error?.response);
       console.error("Error status:", error?.response?.status);
       console.error("Error data:", error?.response?.data);
-
-      const errorMessage =
-        error?.response?.data?.message ||
-        error?.message ||
-        "Yorum eklenirken hata oluştu!";
-      message.error(errorMessage);
     }
   };
 
@@ -383,19 +382,39 @@ const CommentList: React.FC = () => {
 
     try {
       const values = await form.validateFields();
-      const payload: Partial<IComment> = {
+
+      // Parse seasonId and episodeId from combined field (if provided)
+      const seasonEpisodeId = values.seasonEpisodeId;
+      let seasonId: number | undefined;
+      let episodeId: number | undefined;
+
+      if (seasonEpisodeId) {
+        [seasonId, episodeId] = seasonEpisodeId.split("-").map(Number);
+      }
+
+      const payload: ICommentUpdatePayload = {
         content: values.content,
         status: values.status,
       };
+
+      // Only add seasonId and episodeId if they are provided
+      if (seasonId) {
+        payload.seasonId = seasonId;
+      } else {
+        payload.seasonId = null;
+      }
+      if (episodeId) {
+        payload.episodeId = episodeId;
+      } else {
+        payload.episodeId = null;
+      }
+
       await editComment(editingComment.id, payload);
-      message.success("Yorum başarıyla güncellendi!");
       setIsEditModalVisible(false);
       setEditingComment(null);
       form.resetFields();
       fetchComments();
-    } catch (error) {
-      message.error("Yorum güncellenirken hata oluştu!");
-    }
+    } catch (error) {}
   };
 
   const openDeleteModal = (comment: IComment) => {
@@ -413,12 +432,9 @@ const CommentList: React.FC = () => {
 
     try {
       await removeComment(commentToDelete.id);
-      message.success("Yorum başarıyla silindi!");
       fetchComments();
       closeDeleteModal();
-    } catch (error) {
-      message.error("Yorum silinirken hata oluştu!");
-    }
+    } catch (error) {}
   };
 
   const onDelete = async (comment: IComment) => {
@@ -428,21 +444,15 @@ const CommentList: React.FC = () => {
   const onApprove = async (comment: IComment) => {
     try {
       await approveComment(comment.id);
-      message.success("Yorum onaylandı!");
       fetchComments();
-    } catch (error) {
-      message.error("Yorum onaylanırken hata oluştu!");
-    }
+    } catch (error) {}
   };
 
   const onReject = async (comment: IComment) => {
     try {
       await rejectComment(comment.id);
-      message.success("Yorum reddedildi!");
       fetchComments();
-    } catch (error) {
-      message.error("Yorum reddedilirken hata oluştu!");
-    }
+    } catch (error) {}
   };
 
   const handleAnimeLookup = async (query: string) => {
@@ -563,7 +573,6 @@ const CommentList: React.FC = () => {
       );
     } catch (error) {
       console.error("Failed to create episode options:", error);
-      message.error("Sezon ve bölüm bilgileri yüklenemedi!");
     }
   };
 
